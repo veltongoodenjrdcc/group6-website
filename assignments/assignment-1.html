@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Assignment 1 | Team Formation &amp; Core Concepts · Group 6</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@500;600;700&family=Source+Sans+3:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css">
+<link rel="stylesheet" href="../assets/charts.css">
+<style>
+  /* ---------- Hero ---------- */
+  .a1-hero {
+    background:
+      radial-gradient(900px 420px at 80% -10%, rgba(189, 147, 53, 0.13), transparent 60%),
+      linear-gradient(180deg, #161E2B 0%, var(--dark) 100%);
+    color: var(--dark-text);
+    padding: 72px 0 80px;
+    border-bottom: 1px solid var(--dark-line);
+  }
+  .a1-hero .crumb {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--dark-text-soft);
+    margin-bottom: 26px;
+  }
+  .a1-hero .crumb a { color: var(--gold-bright); text-decoration: none; }
+  .a1-hero .crumb a:hover { text-decoration: underline; }
+  .a1-hero h1 {
+    font-size: clamp(32px, 4.4vw, 52px);
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.015em;
+    margin: 16px 0 10px;
+    max-width: 800px;
+  }
+  .a1-hero .hero-sub {
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--gold-bright);
+    margin-bottom: 18px;
+  }
+  .a1-hero .hero-lede {
+    font-size: 17.5px;
+    color: var(--dark-text-soft);
+    max-width: 680px;
+    margin-bottom: 30px;
+  }
+  .a1-hero .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+  .a1-hero .stat-grid { margin-top: 50px; }
+
+  /* ---------- Team cards ---------- */
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+    gap: 18px;
+  }
+  .member-card { padding: 26px 26px 24px; display: flex; flex-direction: column; gap: 14px; }
+  .member-head { display: flex; align-items: center; gap: 14px; }
+  .member-avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: linear-gradient(140deg, var(--dark-2), var(--dark));
+    color: var(--gold-bright);
+    font-weight: 700;
+    font-size: 17px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .member-head h3 { font-size: 18px; line-height: 1.2; }
+  .member-head .member-role {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    color: var(--gold-deep);
+    margin-top: 3px;
+  }
+  .member-field .field-label {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 7px;
+  }
+  .strength-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .member-task {
+    font-size: 14.5px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .member-task::before { content: "✓"; color: var(--gold-deep); font-weight: 700; }
+  .member-note {
+    font-size: 14px;
+    color: var(--ink-soft);
+    border-top: 1px solid var(--line-soft);
+    padding-top: 13px;
+    margin-top: auto;
+  }
+
+  /* ---------- Forms method panel ---------- */
+  .method-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 22px;
+    align-items: start;
+  }
+  .method-copy { padding: 30px 32px; font-size: 16.5px; color: var(--ink-soft); }
+  .method-copy .big-quote {
+    font-size: 17.5px;
+    color: var(--ink);
+    line-height: 1.65;
+  }
+  .mini-stats { display: grid; gap: 12px; }
+  .mini-stat {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 15px 18px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 14px;
+  }
+  .mini-stat .ms-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+  .mini-stat .ms-value { font-weight: 600; font-size: 15px; text-align: right; }
+  .mini-stat .ms-value span { color: var(--gold-deep); }
+
+  /* ---------- Charts grid ---------- */
+  .charts-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+  .charts-grid .span-2 { grid-column: span 2; }
+
+  /* ---------- Leadership ---------- */
+  .governance-callout {
+    padding: 30px 32px;
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--ink);
+    border-left: 4px solid var(--gold);
+    margin-bottom: 22px;
+  }
+  .candidate-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .candidate-card { padding: 28px 28px 26px; position: relative; }
+  .candidate-card .nom-badge {
+    position: absolute;
+    top: 22px;
+    right: 24px;
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    background: var(--gold-tint);
+    color: var(--gold-deep);
+    border: 1px solid #E7D9B4;
+    border-radius: 999px;
+    padding: 5px 12px;
+  }
+  .candidate-card h3 { font-size: 20px; margin-bottom: 2px; padding-right: 130px; }
+  .candidate-card .cand-role {
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    color: var(--gold-deep);
+    margin-bottom: 14px;
+  }
+  .candidate-card p { font-size: 15px; color: var(--ink-soft); }
+
+  /* ---------- Role structure ---------- */
+  .role-orig-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 14px;
+    margin-bottom: 26px;
+  }
+  .role-orig {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 20px;
+  }
+  .role-orig .role-abbr {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--gold-deep);
+    margin-bottom: 6px;
+  }
+  .role-orig h4 { font-size: 15px; margin-bottom: 6px; }
+  .role-orig p { font-size: 13.5px; color: var(--ink-soft); }
+  .role-note {
+    font-size: 14.5px;
+    color: var(--ink-soft);
+    background: var(--gold-tint);
+    border: 1px solid #E7D9B4;
+    border-radius: var(--radius);
+    padding: 14px 18px;
+    margin-bottom: 26px;
+  }
+
+  /* ---------- Timeline ---------- */
+  .timeline { display: grid; gap: 0; max-width: 760px; }
+  .tl-step { display: grid; grid-template-columns: 56px 1fr; gap: 18px; }
+  .tl-marker { display: flex; flex-direction: column; align-items: center; }
+  .tl-num {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: var(--dark);
+    color: var(--gold-bright);
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .tl-line { width: 2px; flex-grow: 1; background: var(--line); margin: 6px 0; }
+  .tl-step:last-child .tl-line { display: none; }
+  .tl-body { padding-bottom: 30px; }
+  .tl-body h3 { font-size: 17px; margin-top: 9px; margin-bottom: 5px; }
+  .tl-body p { font-size: 15px; color: var(--ink-soft); }
+
+  /* ---------- Accountability ---------- */
+  .cadence-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 22px; align-items: start; }
+  .protocol-list { padding: 28px 30px; }
+  .protocol-list h3 { font-size: 17px; margin-bottom: 16px; }
+  .protocol-list ul { list-style: none; display: grid; gap: 12px; }
+  .protocol-list li {
+    font-size: 15px;
+    color: var(--ink-soft);
+    padding-left: 26px;
+    position: relative;
+  }
+  .protocol-list li::before {
+    content: "\2022";
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-weight: 700;
+  }
+
+  /* ---------- Quiz ---------- */
+  .quiz-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 18px; align-items: start; }
+  .quiz-card { padding: 26px 28px; }
+  .quiz-card h3 { font-size: 17px; margin-bottom: 4px; }
+  .quiz-card .quiz-sub { font-size: 13.5px; color: var(--ink-faint); margin-bottom: 20px; }
+  .quiz-rows { display: grid; gap: 10px; }
+  .quiz-row {
+    display: grid;
+    grid-template-columns: 52px 1fr;
+    align-items: center;
+    gap: 12px;
+    padding: 9px 12px;
+    border: 1px solid var(--line-soft);
+    border-radius: 9px;
+    background: #FCFBF8;
+  }
+  .quiz-row .q-no {
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--ink-soft);
+  }
+  .quiz-opts { display: flex; gap: 8px; }
+  .quiz-opt {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1.5px solid var(--line);
+    background: var(--surface);
+    color: var(--ink-faint);
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .quiz-opt.sel {
+    background: linear-gradient(180deg, var(--gold-bright), var(--gold));
+    border-color: var(--gold-deep);
+    color: #1A1407;
+    font-weight: 700;
+    box-shadow: 0 2px 8px -2px rgba(189, 147, 53, 0.6);
+  }
+  .quiz-opt.tf { width: auto; border-radius: 999px; padding: 0 14px; }
+  .quiz-score {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid var(--line-soft);
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    color: var(--ink-soft);
+  }
+  .quiz-score .dot { width: 9px; height: 9px; border-radius: 50%; background: #5B8A4E; }
+
+  /* ---------- Appendix form ---------- */
+  .form-q-list { list-style: none; counter-reset: fq; display: grid; gap: 0; }
+  .form-q-list li {
+    counter-increment: fq;
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    gap: 14px;
+    align-items: baseline;
+    padding: 13px 4px;
+    font-size: 15.5px;
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .form-q-list li:last-child { border-bottom: none; }
+  .form-q-list li::before {
+    content: "Q" counter(fq);
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--gold-deep);
+  }
+
+  @media (max-width: 880px) {
+    .method-grid, .candidate-grid, .charts-grid, .cadence-grid, .quiz-grid { grid-template-columns: 1fr; }
+    .charts-grid .span-2 { grid-column: span 1; }
+    .candidate-card h3 { padding-right: 0; }
+    .candidate-card .nom-badge { position: static; display: inline-block; margin-bottom: 10px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="container nav-inner">
+    <a class="nav-brand" href="../index.html">
+      <img src="../assets/img/group6-logo.png" alt="Group 6 logo">
+    </a>
+    <div class="nav-links">
+      <a href="#team">Team</a>
+      <a href="#form-method">Responses</a>
+      <a href="#data">Data</a>
+      <a href="#skills">Skills</a>
+      <a href="#leadership">Leadership</a>
+      <a href="#structure">Structure</a>
+      <a href="#framework">Operations</a>
+      <a href="#attendance">Attendance</a>
+      <a href="#knowledge">Knowledge Check</a>
+      <a href="#appendix">Appendix</a>
+    </div>
+  </div>
+</nav>
+
+<header class="a1-hero on-dark" id="overview" data-screen-label="Hero">
+  <div class="container">
+    <p class="crumb"><a href="../index.html">Group 6 Hub</a> / Assignment 01</p>
+    <p class="eyebrow">Strategic Management · Assignment 1</p>
+    <h1>Team Formation &amp; Core Concepts</h1>
+    <p class="hero-sub">Group 6 · Strategic Management Consultancy</p>
+    <p class="hero-lede">Group 6 is operating as a strategic/executive management team for Strategic Management Assignment 1. This website presents our team formation, skills inventory, leadership structure, governance process, operational framework, and core concepts knowledge check.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-gold" href="#structure">View Team Structure</a>
+      <a class="btn btn-ghost-dark" href="#data">View Response Summary</a>
+      <a class="btn btn-ghost-dark" href="#knowledge">View Knowledge Check</a>
+    </div>
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-label">Group</div>
+        <div class="stat-value">Group <span>6</span></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Team Size</div>
+        <div class="stat-value"><span>5</span> Members</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Responses Collected</div>
+        <div class="stat-value"><span>5/5</span> via Forms</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Due Date</div>
+        <div class="stat-value">June <span>11</span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="section" id="team" data-screen-label="Team Members">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">Section 01 · Team</p>
+      <h2>The executive team</h2>
+      <p class="lede">Five members, each matched to an executive mandate based on their skills inventory, strongest areas, and comfortable task zones.</p>
+    </div>
+    <div class="team-grid">
+      <article class="card member-card reveal">
+        <div class="member-head">
+          <div class="member-avatar">VG</div>
+          <div>
+            <h3>Velton Gooden Jr.</h3>
+            <div class="member-role">CEO / CTO</div>
+          </div>
+        </div>
+        <div class="member-field">
+          <div class="field-label">Key strengths</div>
+          <div class="strength-tags">
+            <span class="tag">Strategic thinking</span>
+            <span class="tag">Technology</span>
+            <span class="tag">Leadership</span>
+            <span class="tag neutral">Writing</span>
+            <span class="tag neutral">Formatting</span>
+            <span class="tag neutral">Data organisation</span>
+          </div>
+        </div>
+        <div class="member-task">Comfortable task: formatting the final document</div>
+        <p class="member-note">Experience in digital marketing, media production, content creation, project coordination, and practical tech-related work.</p>
+      </article>
+
+      <article class="card member-card reveal">
+        <div class="member-head">
+          <div class="member-avatar">TH</div>
+          <div>
+            <h3>Tywan S Hamilton</h3>
+            <div class="member-role">CMO</div>
+          </div>
+        </div>
+        <div class="member-field">
+          <div class="field-label">Key strengths</div>
+          <div class="strength-tags">
+            <span class="tag">Leadership</span>
+            <span class="tag">Presentation</span>
+            <span class="tag">Communication</span>
+            <span class="tag neutral">Design / layout</span>
+            <span class="tag neutral">Strategic thinking</span>
+            <span class="tag neutral">Creativity</span>
+          </div>
+        </div>
+        <div class="member-task">Comfortable task: presenting / speaking</div>
+        <p class="member-note">Strong leadership and communication skills; also good at designing and developing creative spaces.</p>
+      </article>
+
+      <article class="card member-card reveal">
+        <div class="member-head">
+          <div class="member-avatar">RG</div>
+          <div>
+            <h3>Ryanna Graham</h3>
+            <div class="member-role">CFO</div>
+          </div>
+        </div>
+        <div class="member-field">
+          <div class="field-label">Key strengths</div>
+          <div class="strength-tags">
+            <span class="tag">Editing / proofreading</span>
+            <span class="tag">Research</span>
+            <span class="tag neutral">Data organisation</span>
+            <span class="tag neutral">Note-taking</span>
+          </div>
+        </div>
+        <div class="member-task">Comfortable task: editing and proofreading</div>
+        <p class="member-note">Experience in a hardware store helped develop communication, customer service, organisational, and problem-solving skills.</p>
+      </article>
+
+      <article class="card member-card reveal">
+        <div class="member-head">
+          <div class="member-avatar">TG</div>
+          <div>
+            <h3>Tamina-Shimone Green</h3>
+            <div class="member-role">COO</div>
+          </div>
+        </div>
+        <div class="member-field">
+          <div class="field-label">Key strengths</div>
+          <div class="strength-tags">
+            <span class="tag">Research</span>
+            <span class="tag">Data organisation</span>
+            <span class="tag">Conflict resolution</span>
+          </div>
+        </div>
+        <div class="member-task">Comfortable task: assisting wherever needed</div>
+        <p class="member-note">Management and operations experience. She created the Telegram group and helped initiate the group communication process. She missed the first meeting because her primary phone was down, which prevented her from accessing Telegram updates, but later explained the issue, submitted her response, and became active.</p>
+      </article>
+
+      <article class="card member-card reveal">
+        <div class="member-head">
+          <div class="member-avatar">SH</div>
+          <div>
+            <h3>Shanice Hamilton</h3>
+            <div class="member-role">Chief Communications Officer</div>
+          </div>
+        </div>
+        <div class="member-field">
+          <div class="field-label">Key strengths</div>
+          <div class="strength-tags">
+            <span class="tag">Research</span>
+            <span class="tag">Writing</span>
+            <span class="tag">Presenting / speaking</span>
+          </div>
+        </div>
+        <div class="member-task">Comfortable task: presenting / speaking</div>
+        <p class="member-note">Can support communication, written content, and presentation delivery. Her strongest-skill clarification should be treated cautiously because one form response was entered as &ldquo;3&rdquo;.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="form-method" data-screen-label="Response Collection">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">Section 02 · Method</p>
+      <h2>Response collection via Google Forms</h2>
+    </div>
+    <div class="method-grid">
+      <div class="card method-copy">
+        <p class="big-quote">To collect group input efficiently, Group 6 used Google Forms as the response collection method. The form gathered each member&rsquo;s contact preference, availability, skills, strongest areas, preferred tasks, leadership willingness, leadership nominations, preferred governance method, meeting cadence, and accountability preferences. This helped the group make decisions based on structured responses instead of relying only on informal chat messages.</p>
+      </div>
+      <div class="mini-stats">
+        <div class="mini-stat">
+          <span class="ms-label">Response rate</span>
+          <span class="ms-value"><span>5/5</span> members</span>
+        </div>
+        <div class="mini-stat">
+          <span class="ms-label">Collection tool</span>
+          <span class="ms-value">Google Forms</span>
+        </div>
+        <div class="mini-stat">
+          <span class="ms-label">Main contact method</span>
+          <span class="ms-value">Telegram</span>
+        </div>
+        <div class="mini-stat">
+          <span class="ms-label">Preferred cadence</span>
+          <span class="ms-value">Weekly + pre-deadline check-ins</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="data" data-screen-label="Data Visualisation">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">Section 03 · Data</p>
+      <h2>What the responses showed</h2>
+      <p class="lede">Five members responded to the skills and role-allocation form. Hover any bar or segment for details.</p>
+    </div>
+    <div class="charts-grid">
+
+      <div class="chart-card chart-animate reveal">
+        <h3>Preferred Contact Method</h3>
+        <p class="chart-sub">Chart 1 · n = 5 respondents</p>
+        <div class="donut-wrap">
+          <svg class="donut-svg" viewBox="0 0 160 160" aria-label="Pie chart: Telegram 4, WhatsApp 1">
+            <g transform="rotate(-90 80 80)">
+              <circle cx="80" cy="80" r="60" fill="none" stroke="#F0EEE7" stroke-width="26"></circle>
+              <circle class="donut-seg" cx="80" cy="80" r="60" stroke="#BD9335" style="--arc: 301.6 376.99;" data-tip="Telegram: 4 of 5 members (80%)"></circle>
+              <circle class="donut-seg" cx="80" cy="80" r="60" stroke="#3A4659" stroke-dashoffset="-301.6" style="--arc: 75.4 376.99;" data-tip="WhatsApp: 1 of 5 members (20%)"></circle>
+            </g>
+            <text class="donut-center-num" x="80" y="82" text-anchor="middle">5</text>
+            <text class="donut-center-label" x="80" y="100" text-anchor="middle">RESPONSES</text>
+          </svg>
+          <div class="legend">
+            <div class="legend-item"><span class="legend-swatch" style="background: #BD9335;"></span> Telegram <strong>4</strong></div>
+            <div class="legend-item"><span class="legend-swatch" style="background: #3A4659;"></span> WhatsApp <strong>1</strong></div>
+          </div>
+        </div>
+        <p class="chart-note">Telegram is the main channel; WhatsApp serves as backup where needed.</p>
+      </div>
+
+      <div class="chart-card chart-animate reveal">
+        <h3>Willingness to Serve as Leader/CEO</h3>
+        <p class="chart-sub">Chart 3 · n = 5 respondents</p>
+        <div class="col-chart">
+          <div class="col-item">
+            <div class="col-stack" data-tip="Yes: 2 members">
+              <div class="col-val">2</div>
+              <div class="col-fill" style="--h: 78%;"></div>
+            </div>
+            <div class="col-label">Yes</div>
+          </div>
+          <div class="col-item">
+            <div class="col-stack" data-tip="Maybe, if the group needs me: 2 members">
+              <div class="col-val">2</div>
+              <div class="col-fill" style="--h: 78%;"></div>
+            </div>
+            <div class="col-label">Maybe, if needed</div>
+          </div>
+          <div class="col-item">
+            <div class="col-stack" data-tip="No: 1 member">
+              <div class="col-val">1</div>
+              <div class="col-fill neutral" style="--h: 39%;"></div>
+            </div>
+            <div class="col-label">No</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="chart-card chart-animate reveal span-2">
+        <h3>Leadership Nominations</h3>
+        <p class="chart-sub">Chart 2 · Respondents could select two nominees, so totals exceed the number of respondents</p>
+        <div class="hbar">
+          <div class="hbar-row" data-tip="Tywan S Hamilton: 4 nominations">
+            <div class="hbar-label">Tywan S Hamilton</div>
+            <div class="hbar-track"><div class="hbar-fill" style="--w: 100%;"></div></div>
+            <div class="hbar-val">4</div>
+          </div>
+          <div class="hbar-row" data-tip="Velton Gooden Jr.: 4 nominations">
+            <div class="hbar-label">Velton Gooden Jr.</div>
+            <div class="hbar-track"><div class="hbar-fill" style="--w: 100%;"></div></div>
+            <div class="hbar-val">4</div>
+          </div>
+          <div class="hbar-row" data-tip="Ryanna Graham: 0 nominations">
+            <div class="hbar-label">Ryanna Graham</div>
+            <div class="hbar-track"><div class="hbar-fill neutral" style="--w: 1.5%;"></div></div>
+            <div class="hbar-val">0</div>
+          </div>
+          <div class="hbar-row" data-tip="Tamina-Shimone Green: 0 nominations">
+            <div class="hbar-label">Tamina-Shimone Green</div>
+            <div class="hbar-track"><div class="hbar-fill neutral" style="--w: 1.5%;"></div></div>
+            <div class="hbar-val">0</div>
+          </div>
+          <div class="hbar-row" data-tip="Shanice Hamilton: 0 nominations">
+            <div class="hbar-label">Shanice Hamilton</div>
+            <div class="hbar-track"><div class="hbar-fill neutral" style="--w: 1.5%;"></div></div>
+            <div class="hbar-val">0</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="chart-card chart-animate reveal">
+        <h3>Preferred Meeting Cadence</h3>
+        <p class="chart-sub">Chart 4 · n = 5 respondents</p>
+        <div class="hbar">
+          <div class="hbar-row" data-tip="Weekly check-in plus extra check-ins before deadlines: 4 members">
+            <div class="hbar-label">Weekly + pre-deadline</div>
+            <div class="hbar-track"><div class="hbar-fill" style="--w: 100%;"></div></div>
+            <div class="hbar-val">4</div>
+          </div>
+          <div class="hbar-row" data-tip="Only when assignments are due: 1 member">
+            <div class="hbar-label">Only when due</div>
+            <div class="hbar-track"><div class="hbar-fill neutral" style="--w: 25%;"></div></div>
+            <div class="hbar-val">1</div>
+          </div>
+        </div>
+        <p class="chart-note">The group commits to a weekly check-in, with extra check-ins before major deadlines.</p>
+      </div>
+
+      <div class="chart-card chart-animate reveal">
+        <h3>Skills Frequency Across Group</h3>
+        <p class="chart-sub">Chart 5 · Times each skill was selected</p>
+        <div class="hbar" style="gap: 9px;">
+          <div class="hbar-row" data-tip="Research: selected by all 5 members">
+            <div class="hbar-label">Research</div>
+            <div class="hbar-track" style="height: 20px;"><div class="hbar-fill" style="--w: 100%;"></div></div>
+            <div class="hbar-val">5</div>
+          </div>
+          <div class="hbar-row" data-tip="Data organisation: 4 members">
+            <div class="hbar-label">Data organisation</div>
+            <div class="hbar-track" style="height: 20px;"><div class="hbar-fill" style="--w: 80%;"></div></div>
+            <div class="hbar-val">4</div>
+          </div>
+          <div class="hbar-row" data-tip="Leadership: 2 members">
+            <div class="hbar-label">Leadership</div>
+            <div class="hbar-track" style="height: 20px;"><div class="hbar-fill neutral" style="--w: 40%;"></div></div>
+            <div class="hbar-val">2</div>
+          </div>
+          <div class="hbar-row" data-tip="Editing/proofreading: 2 members">
+            <div class="hbar-label">Editing / proofreading</div>
+            <div class="hbar-track" style="height: 20px;"><div class="hbar-fill neutral" style="--w: 40%;"></div></div>
+            <div class="hbar-val">2</div>
+          </div>
+          <div class="hbar-row" data-tip="Technology: 2 members">
+            <div class="hbar-label">Technology</div>
+            <div class="hbar-track" style="height: 20px;"><div class="hbar-fill neutral" style="--w: 40%;"></div></div>
+            <div class="hbar-val">2</div>
+          </div>
+          <div class="hbar-row" data-tip="Presentation/public speaking: 2 members">
+            <div class="hbar-label">Presentation</div>
+            <div class="hbar-track" style="height: 20px;"><div class="hbar-fill neutral" style="--w: 40%;"></div></div>
+            <div class="hbar-val">2</div>
+          </div>
+          <div class="hbar-row" data-tip="Design/layout/formatting: 2 members">
+            <div class="hbar-label">Design / layout</div>
+            <div class="hbar-track" style="height: 20px;"><div class="hbar-fill neutral" style="--w: 40%;"></div></div>
+            <div class="hbar-val">2</div>
+          </div>
+          <div class="hbar-row" data-tip="Strategic thinking: 2 members">
+            <div class="hbar-label">Strategic thinking</div>
+            <div class="hbar-track" style="height: 20px;"><div class="hbar-fill neutral" style="--w: 40%;"></div></div>
+            <div class="hbar-val">2</div>
+          </div>
+          <div class="hbar-row" data-tip="Conflict resolution: 2 members">
+            <div class="hbar-label">Conflict resolution</div>
+            <div class="hbar-track" style="height: 20px;"><div class="hbar-fill neutral" style="--w: 40%;"></div></div>
+            <div class="hbar-val">2</div>
+          </div>
+          <div class="hbar-row" data-tip="Writing: 2 members">
+            <div class="hbar-label">Writing</div>
+            <div class="hbar-track" style="height: 20px;"><div class="hbar-fill neutral" style="--w: 40%;"></div></div>
+            <div class="hbar-val">2</div>
+          </div>
+          <div class="hbar-row" data-tip="Note-taking: 1 member">
+            <div class="hbar-label">Note-taking</div>
+            <div class="hbar-track" style="height: 20px;"><div class="hbar-fill neutral" style="--w: 20%;"></div></div>
+            <div class="hbar-val">1</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="section" id="skills" data-screen-label="Skills Inventory">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">Section 04 · Skills</p>
+      <h2>Skills inventory</h2>
+    </div>
+    <div class="table-wrap reveal">
+      <table class="data">
+        <thead>
+          <tr>
+            <th>Member</th>
+            <th>Skills / Strengths Identified</th>
+            <th>Strongest Areas</th>
+            <th>Suggested Role</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="member-name">Velton Gooden Jr.</td>
+            <td>Leadership; Research; Writing; Technology; Presentation/public speaking; Design/layout/formatting; Strategic thinking; Data organisation</td>
+            <td>Strategic Thinking, Technology &amp; Leadership</td>
+            <td><span class="tag">CEO / CTO</span></td>
+          </tr>
+          <tr>
+            <td class="member-name">Ryanna Graham</td>
+            <td>Research; Editing/proofreading; Data organisation; Note-taking</td>
+            <td>Editing/Proofreading and Research</td>
+            <td><span class="tag">CFO</span></td>
+          </tr>
+          <tr>
+            <td class="member-name">Tamina-Shimone Green</td>
+            <td>Research; Data organisation; Conflict resolution</td>
+            <td>Research and conflict resolution</td>
+            <td><span class="tag">COO</span></td>
+          </tr>
+          <tr>
+            <td class="member-name">Shanice Hamilton</td>
+            <td>Research; Writing</td>
+            <td>Research and writing based on selected skills; strongest areas to be clarified</td>
+            <td><span class="tag">CCO</span></td>
+          </tr>
+          <tr>
+            <td class="member-name">Tywan S Hamilton</td>
+            <td>Leadership; Editing/proofreading; Technology; Presentation/public speaking; Design/layout/formatting; Strategic thinking; Data organisation; Conflict resolution</td>
+            <td>Leadership, Presentation</td>
+            <td><span class="tag">CMO</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="leadership" data-screen-label="Leadership & Governance">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">Section 05 · Governance</p>
+      <h2>Leadership &amp; governance</h2>
+    </div>
+    <div class="card governance-callout reveal">
+      The form responses showed strong support for both Tywan S Hamilton and Velton Gooden Jr. as possible leadership candidates; each received 4 nominations. The group will use a <strong>skills-based shortlist followed by an anonymous vote</strong> to make the final Leader/CEO decision. This method combines the group&rsquo;s preference with practical leadership criteria such as communication, reliability, organisation, willingness to coordinate, and ability to keep the team focused.
+    </div>
+    <div class="candidate-grid">
+      <article class="card candidate-card reveal">
+        <span class="nom-badge">4 nominations</span>
+        <h3>Velton Gooden Jr.</h3>
+        <p class="cand-role">CEO / CTO</p>
+        <p>Velton is recommended to carry a dual CEO/CTO role because the group needs both central coordination and technical oversight. His strengths in strategic thinking, writing, organisation, digital tools, website development, formatting, and deadline management allow him to guide the group&rsquo;s direction while also managing technical and digital components.</p>
+      </article>
+      <article class="card candidate-card reveal">
+        <span class="nom-badge">4 nominations</span>
+        <h3>Tywan S Hamilton</h3>
+        <p class="cand-role">Leadership Candidate / CMO</p>
+        <p>Tywan was strongly nominated as a potential leader and is recommended for the CMO role because her strengths align with communication, presentation, design/layout, strategic thinking, creativity, and group-facing delivery.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="structure" data-screen-label="Executive Role Structure">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">Section 06 · Structure</p>
+      <h2>Executive role structure</h2>
+      <p class="lede">The original executive structure assigned five functional mandates:</p>
+    </div>
+    <div class="role-orig-grid">
+      <div class="role-orig reveal">
+        <div class="role-abbr">CEO</div>
+        <h4>Chief Executive Officer</h4>
+        <p>Group Leader</p>
+      </div>
+      <div class="role-orig reveal">
+        <div class="role-abbr">CFO</div>
+        <h4>Chief Financial Officer</h4>
+        <p>Budgeting, financials, and finance-related content</p>
+      </div>
+      <div class="role-orig reveal">
+        <div class="role-abbr">COO</div>
+        <h4>Chief Operating Officer</h4>
+        <p>Administration, documentation, and coordination</p>
+      </div>
+      <div class="role-orig reveal">
+        <div class="role-abbr">CTO</div>
+        <h4>Chief Technical Officer</h4>
+        <p>IT-related tasks, digital systems, website support</p>
+      </div>
+      <div class="role-orig reveal">
+        <div class="role-abbr">CMO</div>
+        <h4>Chief Marketing Officer</h4>
+        <p>Design, videos, visual presentation, marketing-related content</p>
+      </div>
+    </div>
+    <p class="role-note">Some members wanted more creative or personalised titles, so the current titles may be refined later while keeping functional responsibilities clear.</p>
+    <h3 style="font-size: 19px; margin-bottom: 16px;">Current working structure</h3>
+    <div class="table-wrap reveal">
+      <table class="data">
+        <thead>
+          <tr>
+            <th>Member</th>
+            <th>Executive Role</th>
+            <th>Rationale</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="member-name">Velton Gooden Jr.</td>
+            <td><span class="tag">CEO / CTO</span></td>
+            <td>Suited to dual leadership and technical oversight due to strengths in coordination, strategic thinking, writing, formatting, digital tools, and website-related work.</td>
+          </tr>
+          <tr>
+            <td class="member-name">Tywan S Hamilton</td>
+            <td><span class="tag">CMO</span></td>
+            <td>Strong fit for marketing and presentation because of leadership, communication, design/layout, strategic thinking, and creative delivery.</td>
+          </tr>
+          <tr>
+            <td class="member-name">Ryanna Graham</td>
+            <td><span class="tag">CFO</span></td>
+            <td>Suited to finance and resource-focused work because of research, editing, data organisation, reliability, and problem-solving strengths.</td>
+          </tr>
+          <tr>
+            <td class="member-name">Tamina-Shimone Green</td>
+            <td><span class="tag">COO</span></td>
+            <td>Suited to operations because of management and operations experience, communication initiative, and role in creating the Telegram group.</td>
+          </tr>
+          <tr>
+            <td class="member-name">Shanice Hamilton</td>
+            <td><span class="tag">CCO</span></td>
+            <td>Suited to communication and presentation support based on research, writing, and presenting/speaking strengths.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="framework" data-screen-label="Operational Framework">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">Section 07 · Operations</p>
+      <h2>Operational framework</h2>
+      <p class="lede">The standing process Group 6 follows for every assignment this semester.</p>
+    </div>
+    <div class="timeline">
+      <div class="tl-step reveal">
+        <div class="tl-marker"><div class="tl-num">01</div><div class="tl-line"></div></div>
+        <div class="tl-body"><h3>Review requirements together</h3><p>The group reviews the assignment requirements as a team before any work begins.</p></div>
+      </div>
+      <div class="tl-step reveal">
+        <div class="tl-marker"><div class="tl-num">02</div><div class="tl-line"></div></div>
+        <div class="tl-body"><h3>Collect input early</h3><p>Group input is gathered early using Google Forms, polls, and Telegram messages.</p></div>
+      </div>
+      <div class="tl-step reveal">
+        <div class="tl-marker"><div class="tl-num">03</div><div class="tl-line"></div></div>
+        <div class="tl-body"><h3>Assign tasks by strength</h3><p>Tasks are assigned based on each member&rsquo;s strengths, availability, and comfort level.</p></div>
+      </div>
+      <div class="tl-step reveal">
+        <div class="tl-marker"><div class="tl-num">04</div><div class="tl-line"></div></div>
+        <div class="tl-body"><h3>Set internal deadlines</h3><p>Internal deadlines are set before the actual submission deadline.</p></div>
+      </div>
+      <div class="tl-step reveal">
+        <div class="tl-marker"><div class="tl-num">05</div><div class="tl-line"></div></div>
+        <div class="tl-body"><h3>Communicate on Telegram</h3><p>Telegram is the main communication channel, with WhatsApp as backup.</p></div>
+      </div>
+      <div class="tl-step reveal">
+        <div class="tl-marker"><div class="tl-num">06</div><div class="tl-line"></div></div>
+        <div class="tl-body"><h3>Combine and review</h3><p>All sections are combined into one document and given a final review.</p></div>
+      </div>
+      <div class="tl-step reveal">
+        <div class="tl-marker"><div class="tl-num">07</div><div class="tl-line"></div></div>
+        <div class="tl-body"><h3>Submit Moodle response + website URL</h3><p>The final Moodle response is submitted along with the URL for the updated assignment section of this website.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="cadence" data-screen-label="Meeting Cadence & Accountability">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">Section 08 · Cadence</p>
+      <h2>Meeting cadence &amp; accountability</h2>
+    </div>
+    <div class="cadence-grid">
+      <div class="card method-copy reveal">
+        <p class="big-quote">Group 6 will use Telegram as the main contact method for group updates. Based on the responses, the group will commit to a weekly check-in, with extra check-ins before major deadlines. Since availability varies for some members and Sunday was also identified as a possible meeting time, the group will use Telegram polls when necessary to confirm the most suitable time for each check-in.</p>
+      </div>
+      <div class="card protocol-list reveal">
+        <h3>Accountability protocol</h3>
+        <ul>
+          <li>The Leader/CEO or designated coordinator posts the check-in agenda.</li>
+          <li>Members provide updates on assigned tasks.</li>
+          <li>If a member cannot attend, they send an update before the meeting where possible.</li>
+          <li>Attendance and task progress are recorded.</li>
+          <li>Final submissions are reviewed for consistency, formatting, grammar, and completeness.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="attendance" data-screen-label="Attendance Record">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">Section 09 · Record</p>
+      <h2>Attendance record: Assignment 1</h2>
+    </div>
+    <div class="table-wrap reveal">
+      <table class="data">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Meeting / Purpose</th>
+            <th>Member</th>
+            <th>Status</th>
+            <th>Assigned Task</th>
+            <th>Progress / Comments</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>June 8&ndash;9</td>
+            <td>Assignment 1 planning and skills form</td>
+            <td class="member-name">Velton Gooden Jr.</td>
+            <td><span class="tag">Present / Responded</span></td>
+            <td>Coordination, form preparation, final formatting</td>
+            <td>Submitted form response and assisted with organising the group submission.</td>
+          </tr>
+          <tr>
+            <td>June 8&ndash;9</td>
+            <td>Assignment 1 planning and skills form</td>
+            <td class="member-name">Tywan S Hamilton</td>
+            <td><span class="tag">Present / Responded</span></td>
+            <td>Leadership / presentation input</td>
+            <td>Submitted form response and indicated willingness to serve as Leader/CEO.</td>
+          </tr>
+          <tr>
+            <td>June 8&ndash;9</td>
+            <td>Assignment 1 planning and skills form</td>
+            <td class="member-name">Ryanna Graham</td>
+            <td><span class="tag">Present / Responded</span></td>
+            <td>Research and editing support</td>
+            <td>Submitted form response and contributed leadership nominations.</td>
+          </tr>
+          <tr>
+            <td>June 8&ndash;9</td>
+            <td>Assignment 1 planning and skills form</td>
+            <td class="member-name">Shanice Hamilton</td>
+            <td><span class="tag">Present / Responded</span></td>
+            <td>Writing / presentation support</td>
+            <td>Submitted form response and contributed leadership nomination.</td>
+          </tr>
+          <tr>
+            <td>June 8&ndash;9</td>
+            <td>Assignment 1 planning and skills form</td>
+            <td class="member-name">Tamina-Shimone Green</td>
+            <td><span class="tag neutral">Absent (explained) / Responded</span></td>
+            <td>Research, data organisation, and conflict-resolution support</td>
+            <td>Explained that her primary phone was down, preventing access to Telegram updates. Later submitted her response, became active, and had already helped initiate the group process by creating the Telegram group.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="margin-top: 16px;">
+      <details class="accordion">
+        <summary>Blank attendance template for future meetings</summary>
+        <div class="accordion-body">
+          <div class="table-wrap" style="box-shadow: none;">
+            <table class="data">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Meeting Purpose</th>
+                  <th>Member Name</th>
+                  <th>Present / Absent</th>
+                  <th>Assigned Task</th>
+                  <th>Progress / Comments</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>&nbsp;</td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>&nbsp;</td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>&nbsp;</td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>&nbsp;</td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>&nbsp;</td><td></td><td></td><td></td><td></td><td></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="knowledge" data-screen-label="Knowledge Check">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">Section 10 · Core Concepts</p>
+      <h2>Knowledge check</h2>
+      <p class="lede">Group 6&rsquo;s submitted answers for the core concepts knowledge check, shown as the completed answer sheet.</p>
+    </div>
+    <div class="quiz-grid">
+      <div class="card quiz-card reveal">
+        <h3>Multiple Choice</h3>
+        <p class="quiz-sub">Questions 1&ndash;10 · selected answers highlighted</p>
+        <div class="quiz-rows">
+          <div class="quiz-row"><span class="q-no">Q1</span><div class="quiz-opts"><span class="quiz-opt">A</span><span class="quiz-opt sel">B</span><span class="quiz-opt">C</span><span class="quiz-opt">D</span></div></div>
+          <div class="quiz-row"><span class="q-no">Q2</span><div class="quiz-opts"><span class="quiz-opt">A</span><span class="quiz-opt sel">B</span><span class="quiz-opt">C</span><span class="quiz-opt">D</span></div></div>
+          <div class="quiz-row"><span class="q-no">Q3</span><div class="quiz-opts"><span class="quiz-opt">A</span><span class="quiz-opt sel">B</span><span class="quiz-opt">C</span><span class="quiz-opt">D</span></div></div>
+          <div class="quiz-row"><span class="q-no">Q4</span><div class="quiz-opts"><span class="quiz-opt">A</span><span class="quiz-opt">B</span><span class="quiz-opt sel">C</span><span class="quiz-opt">D</span></div></div>
+          <div class="quiz-row"><span class="q-no">Q5</span><div class="quiz-opts"><span class="quiz-opt">A</span><span class="quiz-opt sel">B</span><span class="quiz-opt">C</span><span class="quiz-opt">D</span></div></div>
+          <div class="quiz-row"><span class="q-no">Q6</span><div class="quiz-opts"><span class="quiz-opt">A</span><span class="quiz-opt">B</span><span class="quiz-opt sel">C</span><span class="quiz-opt">D</span></div></div>
+          <div class="quiz-row"><span class="q-no">Q7</span><div class="quiz-opts"><span class="quiz-opt">A</span><span class="quiz-opt sel">B</span><span class="quiz-opt">C</span><span class="quiz-opt">D</span></div></div>
+          <div class="quiz-row"><span class="q-no">Q8</span><div class="quiz-opts"><span class="quiz-opt">A</span><span class="quiz-opt sel">B</span><span class="quiz-opt">C</span><span class="quiz-opt">D</span></div></div>
+          <div class="quiz-row"><span class="q-no">Q9</span><div class="quiz-opts"><span class="quiz-opt">A</span><span class="quiz-opt">B</span><span class="quiz-opt sel">C</span><span class="quiz-opt">D</span></div></div>
+          <div class="quiz-row"><span class="q-no">Q10</span><div class="quiz-opts"><span class="quiz-opt">A</span><span class="quiz-opt sel">B</span><span class="quiz-opt">C</span><span class="quiz-opt">D</span></div></div>
+        </div>
+        <div class="quiz-score"><span class="dot"></span> 10 OF 10 ANSWERED · SUBMITTED</div>
+      </div>
+      <div class="card quiz-card reveal">
+        <h3>True / False</h3>
+        <p class="quiz-sub">Questions 11&ndash;15 · selected answers highlighted</p>
+        <div class="quiz-rows">
+          <div class="quiz-row"><span class="q-no">Q11</span><div class="quiz-opts"><span class="quiz-opt tf">True</span><span class="quiz-opt tf sel">False</span></div></div>
+          <div class="quiz-row"><span class="q-no">Q12</span><div class="quiz-opts"><span class="quiz-opt tf sel">True</span><span class="quiz-opt tf">False</span></div></div>
+          <div class="quiz-row"><span class="q-no">Q13</span><div class="quiz-opts"><span class="quiz-opt tf sel">True</span><span class="quiz-opt tf">False</span></div></div>
+          <div class="quiz-row"><span class="q-no">Q14</span><div class="quiz-opts"><span class="quiz-opt tf">True</span><span class="quiz-opt tf sel">False</span></div></div>
+          <div class="quiz-row"><span class="q-no">Q15</span><div class="quiz-opts"><span class="quiz-opt tf">True</span><span class="quiz-opt tf sel">False</span></div></div>
+        </div>
+        <div class="quiz-score"><span class="dot"></span> 5 OF 5 ANSWERED · SUBMITTED</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="appendix" data-screen-label="Appendix">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">Section 11 · Appendix</p>
+      <h2>Appendix &amp; response summary</h2>
+    </div>
+
+    <details class="accordion reveal" open>
+      <summary>Google Forms instrument: Strategic Management Group Skills &amp; Role Allocation Form</summary>
+      <div class="accordion-body">
+        <p style="font-size: 15px; color: var(--ink-soft); margin-bottom: 18px;">Please complete this form to help the group prepare Assignment 1 for Strategic Management. Your responses will be used to build the group skills inventory, identify possible leadership candidates, assign roles fairly, and create a clear operational plan for the semester.</p>
+        <ol class="form-q-list">
+          <li>Full Name</li>
+          <li>Preferred contact method for group updates</li>
+          <li>What times are you usually available for group discussions?</li>
+          <li>Which of the following skills do you bring to the group?</li>
+          <li>Of the skills selected above, which are your strongest 2 or 3?</li>
+          <li>Briefly explain any experience, background, or personal strengths that could help the group.</li>
+          <li>Which type of task would you be most comfortable handling?</li>
+          <li>Which type of task would you prefer to avoid if possible?</li>
+          <li>Would you be willing to serve as the group Leader/CEO?</li>
+          <li>Who would you nominate as two possible Leader/CEO candidates?</li>
+          <li>Why do you think your selected candidate(s) would be suitable?</li>
+          <li>Which method should we use to make the final Leader/CEO decision?</li>
+          <li>How often should the group meet or check in?</li>
+          <li>What should happen if someone is unable to attend a meeting?</li>
+          <li>Do you agree that attendance and task progress should be recorded for accountability?</li>
+          <li>Any additional suggestions for how the group should work together this semester?</li>
+        </ol>
+      </div>
+    </details>
+
+    <details class="accordion reveal" id="responses">
+      <summary>Raw response summary</summary>
+      <div class="accordion-body">
+        <div class="table-wrap" style="box-shadow: none;">
+          <table class="data">
+            <thead>
+              <tr>
+                <th>Area</th>
+                <th>Summary</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Responses received</strong></td><td>5 out of 5 members submitted responses.</td></tr>
+              <tr><td><strong>Main communication channel</strong></td><td>Telegram was selected by four members; WhatsApp was selected by one member and can be used as backup.</td></tr>
+              <tr><td><strong>Leadership nominations</strong></td><td>Tywan S Hamilton and Velton Gooden Jr. each received 4 nominations.</td></tr>
+              <tr><td><strong>Leader selection process</strong></td><td>Skills-based shortlist followed by anonymous vote.</td></tr>
+              <tr><td><strong>Meeting cadence</strong></td><td>Weekly check-in plus extra check-ins before deadlines.</td></tr>
+              <tr><td><strong>Digital submission approach</strong></td><td>In addition to Moodle text submissions, the group will maintain a living website and provide a URL to the updated section with each assignment submission.</td></tr>
+              <tr><td><strong>Executive role structure</strong></td><td>Velton Gooden Jr. as CEO/CTO, Tywan S Hamilton as CMO, Ryanna Graham as CFO, Tamina-Shimone Green as COO, and Shanice Hamilton as Chief Communications Officer.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </details>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <img src="../assets/img/group6-logo.png" alt="Group 6 logo">
+    </div>
+    <p class="footer-meta"><a href="../index.html">GROUP 6 HUB</a> · ASSIGNMENT 1 · TEAM FORMATION &amp; CORE CONCEPTS · DUE JUNE 11</p>
+  </div>
+</footer>
+
+<script src="../assets/charts.js"></script>
+</body>
+</html>

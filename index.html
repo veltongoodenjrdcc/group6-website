@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Group 6 | Strategic Management Consultancy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@500;600;700&family=Source+Sans+3:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/charts.css">
+<style>
+  /* ---------- Hub hero ---------- */
+  .hub-hero {
+    background:
+      radial-gradient(1100px 480px at 75% -10%, rgba(189, 147, 53, 0.13), transparent 60%),
+      linear-gradient(180deg, #161E2B 0%, var(--dark) 100%);
+    color: var(--dark-text);
+    padding: 84px 0 92px;
+    border-bottom: 1px solid var(--dark-line);
+  }
+  .hub-hero .hero-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 56px;
+    align-items: center;
+  }
+  .hub-hero h1 {
+    font-size: clamp(34px, 4.6vw, 54px);
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.015em;
+    margin: 18px 0 18px;
+  }
+  .hub-hero h1 em {
+    font-style: normal;
+    background: linear-gradient(100deg, var(--gold-bright), #F0D795 50%, var(--gold));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .hub-hero p.hero-lede {
+    font-size: 18px;
+    color: var(--dark-text-soft);
+    max-width: 520px;
+    margin-bottom: 30px;
+  }
+  .hero-logo-panel {
+    background: rgba(255, 255, 255, 0.035);
+    border: 1px solid var(--dark-line);
+    border-radius: var(--radius-lg);
+    padding: 8px 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .hero-logo-panel img { width: 100%; max-width: 430px; }
+  .hub-hero .stat-grid { margin-top: 54px; }
+
+  /* ---------- Assignment cards ---------- */
+  .assignment-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+  .assignment-card {
+    border-radius: var(--radius-lg);
+    padding: 30px 30px 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-height: 230px;
+  }
+  .assignment-card.live {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow-lg);
+    position: relative;
+    overflow: hidden;
+  }
+  .assignment-card.live::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 4px;
+    background: linear-gradient(180deg, var(--gold-bright), var(--gold-deep));
+  }
+  .assignment-card.soon {
+    border: 1.5px dashed #D4D0C3;
+    background: transparent;
+    justify-content: center;
+    align-items: flex-start;
+  }
+  .assignment-card .assignment-no {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+  }
+  .assignment-card h3 { font-size: 22px; }
+  .assignment-card.soon h3 { color: var(--ink-faint); font-weight: 600; font-size: 19px; }
+  .assignment-card p { font-size: 15px; color: var(--ink-soft); flex-grow: 1; }
+  .assignment-card .card-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 6px; }
+  .status-pill {
+    margin-left: auto;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 4px 11px;
+    border-radius: 999px;
+  }
+  .status-pill.live-pill {
+    background: #E8F2E4;
+    color: #3D6B33;
+    border: 1px solid #CBDFC4;
+  }
+  .status-pill.soon-pill {
+    background: #F0EFEA;
+    color: var(--ink-faint);
+    border: 1px solid var(--line);
+  }
+
+  /* ---------- Team roster strip ---------- */
+  .roster-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 14px;
+  }
+  .roster-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 22px 18px 20px;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    transition: transform 0.18s, box-shadow 0.18s, border-color 0.18s;
+  }
+  .roster-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+    border-color: #DCCB9A;
+  }
+  .roster-avatar {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: linear-gradient(140deg, var(--dark-2), var(--dark));
+    color: var(--gold-bright);
+    font-weight: 700;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+    letter-spacing: 0.03em;
+  }
+  .roster-card .roster-name { font-weight: 600; font-size: 15px; line-height: 1.3; }
+  .roster-card .roster-role {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    letter-spacing: 0.05em;
+    color: var(--gold-deep);
+  }
+
+  /* ---------- How it works ---------- */
+  .how-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+  .how-step {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    padding: 26px;
+  }
+  .how-step .step-no {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--gold-deep);
+    margin-bottom: 10px;
+  }
+  .how-step h3 { font-size: 17px; margin-bottom: 8px; }
+  .how-step p { font-size: 14.5px; color: var(--ink-soft); }
+
+  @media (max-width: 880px) {
+    .hub-hero .hero-grid { grid-template-columns: 1fr; gap: 36px; }
+    .hero-logo-panel { max-width: 420px; }
+    .assignment-grid { grid-template-columns: 1fr; }
+    .roster-grid { grid-template-columns: repeat(2, 1fr); }
+    .how-strip { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="container nav-inner">
+    <a class="nav-brand" href="index.html">
+      <img src="assets/img/group6-logo.png" alt="Group 6 logo">
+    </a>
+    <div class="nav-links">
+      <a href="#assignments">Assignments</a>
+      <a href="#team">Executive Team</a>
+      <a href="#how">How This Site Works</a>
+      <a href="assignments/assignment-1.html">Assignment 1 ↗</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hub-hero on-dark">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <p class="eyebrow">Strategic Management · Semester Hub</p>
+        <h1>Group 6, operating as an <em>executive team</em>.</h1>
+        <p class="hero-lede">This is the living digital home of Group 6&rsquo;s Strategic Management coursework. Each assignment is submitted in Moodle and published here as a polished microsite, growing throughout the semester.</p>
+        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+          <a class="btn btn-gold" href="assignments/assignment-1.html">Open Assignment 1</a>
+          <a class="btn btn-ghost-dark" href="#team">Meet the Team</a>
+        </div>
+      </div>
+      <div class="hero-logo-panel">
+        <img src="assets/img/group6-logo.png" alt="Group 6 Strategic Management Consultancy">
+      </div>
+    </div>
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-label">Course</div>
+        <div class="stat-value">Strategic <span>Mgmt</span></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Members</div>
+        <div class="stat-value"><span>5</span> Executives</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Assignments Live</div>
+        <div class="stat-value"><span>1</span> of 1 due</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Main Channel</div>
+        <div class="stat-value">Telegram</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="section" id="assignments">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">Coursework</p>
+      <h2>Assignments</h2>
+      <p class="lede">Each assignment gets its own microsite section, built on the same brand system. New entries appear here as the semester progresses.</p>
+    </div>
+    <div class="assignment-grid">
+      <article class="assignment-card live reveal">
+        <div class="assignment-no">Assignment 01 <span class="status-pill live-pill">Live</span></div>
+        <h3>Team Formation &amp; Core Concepts</h3>
+        <p>Team formation, skills inventory, leadership structure, governance process, operational framework, and the core concepts knowledge check. Due June 11, with responses collected 5/5 via Google Forms.</p>
+        <div class="card-actions">
+          <a class="btn btn-gold" href="assignments/assignment-1.html">Open microsite</a>
+          <a class="btn btn-ghost-light" href="assignments/assignment-1.html#data">View charts</a>
+        </div>
+      </article>
+      <article class="assignment-card soon reveal">
+        <div class="assignment-no">Assignment 02 <span class="status-pill soon-pill">Coming soon</span></div>
+        <h3>To be announced</h3>
+      </article>
+      <article class="assignment-card soon reveal">
+        <div class="assignment-no">Assignment 03 <span class="status-pill soon-pill">Coming soon</span></div>
+        <h3>To be announced</h3>
+      </article>
+      <article class="assignment-card soon reveal">
+        <div class="assignment-no">Assignment 04 <span class="status-pill soon-pill">Coming soon</span></div>
+        <h3>To be announced</h3>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="team">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">Executive Team</p>
+      <h2>Five members, five mandates</h2>
+      <p class="lede">Group 6 operates with an executive role structure. Full profiles, strengths, and role rationale live in the Assignment 1 microsite.</p>
+    </div>
+    <div class="roster-grid">
+      <a class="roster-card reveal" href="assignments/assignment-1.html#team">
+        <div class="roster-avatar">VG</div>
+        <div class="roster-name">Velton Gooden Jr.</div>
+        <div class="roster-role">CEO / CTO</div>
+      </a>
+      <a class="roster-card reveal" href="assignments/assignment-1.html#team">
+        <div class="roster-avatar">TH</div>
+        <div class="roster-name">Tywan S Hamilton</div>
+        <div class="roster-role">CMO</div>
+      </a>
+      <a class="roster-card reveal" href="assignments/assignment-1.html#team">
+        <div class="roster-avatar">RG</div>
+        <div class="roster-name">Ryanna Graham</div>
+        <div class="roster-role">CFO</div>
+      </a>
+      <a class="roster-card reveal" href="assignments/assignment-1.html#team">
+        <div class="roster-avatar">TG</div>
+        <div class="roster-name">Tamina-Shimone Green</div>
+        <div class="roster-role">COO</div>
+      </a>
+      <a class="roster-card reveal" href="assignments/assignment-1.html#team">
+        <div class="roster-avatar">SH</div>
+        <div class="roster-name">Shanice Hamilton</div>
+        <div class="roster-role">CCO</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="how">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">Living Coursework</p>
+      <h2>How this site works</h2>
+    </div>
+    <div class="how-strip">
+      <div class="how-step reveal">
+        <div class="step-no">01</div>
+        <h3>Submit in Moodle</h3>
+        <p>The required text is submitted directly in Moodle, concise and to the assignment specification.</p>
+      </div>
+      <div class="how-step reveal">
+        <div class="step-no">02</div>
+        <h3>Publish the microsite</h3>
+        <p>The enhanced presentation layer of charts, profiles, tables, and visual summaries is published here.</p>
+      </div>
+      <div class="how-step reveal">
+        <div class="step-no">03</div>
+        <h3>Share the URL</h3>
+        <p>Each Moodle submission includes the URL to the updated section of this living website.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <img src="assets/img/group6-logo.png" alt="Group 6 logo">
+    </div>
+    <p class="footer-meta">GROUP 6 · STRATEGIC MANAGEMENT · <a href="assignments/assignment-1.html">ASSIGNMENT 1</a></p>
+  </div>
+</footer>
+
+<script src="assets/charts.js"></script>
+</body>
+</html>

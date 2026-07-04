@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Assignment 2 | FindYello.com Modernisation Project &middot; Group 6</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@500;600;700&family=Source+Sans+3:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css">
+<link rel="stylesheet" href="../assets/charts.css">
+<style>
+  .a2-hero {
+    background:
+      radial-gradient(880px 430px at 82% -8%, rgba(91, 138, 78, 0.22), transparent 62%),
+      radial-gradient(780px 380px at 0% 20%, rgba(189, 147, 53, 0.13), transparent 64%),
+      linear-gradient(180deg, #151D2A 0%, var(--dark) 100%);
+    color: var(--dark-text);
+    padding: 72px 0 80px;
+    border-bottom: 1px solid var(--dark-line);
+  }
+  .a2-hero .crumb {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--dark-text-soft);
+    margin-bottom: 26px;
+  }
+  .a2-hero .crumb a {
+    color: var(--gold-bright);
+    text-decoration: none;
+  }
+  .a2-hero .crumb a:hover { text-decoration: underline; }
+  .a2-hero h1 {
+    font-size: clamp(32px, 4.4vw, 54px);
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.01em;
+    margin: 16px 0 12px;
+    max-width: 880px;
+  }
+  .a2-hero .hero-sub {
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--gold-bright);
+    margin-bottom: 18px;
+  }
+  .a2-hero .hero-lede {
+    font-size: 17.5px;
+    color: var(--dark-text-soft);
+    max-width: 740px;
+    margin-bottom: 30px;
+  }
+  .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+  .a2-hero .stat-grid { margin-top: 50px; }
+
+  .summary-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
+    gap: 22px;
+    align-items: start;
+  }
+  .summary-card {
+    padding: 30px 32px;
+  }
+  .summary-card h3 {
+    font-size: 23px;
+    margin: 10px 0 12px;
+  }
+  .summary-card p {
+    color: var(--ink-soft);
+    margin-bottom: 14px;
+  }
+  .source-stack {
+    display: grid;
+    gap: 12px;
+  }
+  .source-card {
+    padding: 18px 20px;
+  }
+  .source-card .source-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 5px;
+  }
+  .source-card h3 {
+    font-size: 17px;
+    margin-bottom: 5px;
+  }
+  .source-card p {
+    color: var(--ink-soft);
+    font-size: 14.5px;
+  }
+
+  .question-callout {
+    background: #FCFBF8;
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--gold);
+    border-radius: var(--radius);
+    padding: 20px 22px;
+    color: var(--ink);
+    font-size: 16px;
+    margin: 18px 0;
+  }
+  .value-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-top: 22px;
+  }
+  .value-card {
+    background: #FCFBF8;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 18px;
+  }
+  .value-card .value-no {
+    font-family: var(--font-mono);
+    color: var(--gold-deep);
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .value-card h4 {
+    font-size: 16px;
+    margin-bottom: 7px;
+  }
+  .value-card p {
+    color: var(--ink-soft);
+    font-size: 14.5px;
+  }
+
+  .role-note {
+    font-size: 15.5px;
+    color: var(--ink-soft);
+    background: var(--gold-tint);
+    border: 1px solid #E7D9B4;
+    border-radius: var(--radius);
+    padding: 16px 18px;
+    margin-bottom: 22px;
+  }
+
+  .process-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  .process-step {
+    display: grid;
+    grid-template-columns: 42px 1fr;
+    gap: 14px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 18px;
+  }
+  .process-step .step-no {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--dark);
+    color: var(--gold-bright);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .process-step h3 {
+    font-size: 17px;
+    margin-bottom: 4px;
+  }
+  .process-step p {
+    font-size: 14.5px;
+    color: var(--ink-soft);
+  }
+
+  .model-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+  }
+  .model-card {
+    padding: 20px;
+  }
+  .model-card .model-label {
+    font-family: var(--font-mono);
+    color: var(--gold-deep);
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .model-card h3 {
+    font-size: 17px;
+    margin-bottom: 7px;
+  }
+  .model-card p {
+    color: var(--ink-soft);
+    font-size: 14.5px;
+  }
+
+  .scan-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+  .scan-nav a {
+    text-decoration: none;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 8px 12px;
+  }
+  .scan-nav a:hover {
+    color: var(--gold-deep);
+    border-color: #DCCB9A;
+  }
+  .scan-block + .scan-block {
+    margin-top: 38px;
+  }
+  .scan-block h3 {
+    font-size: 24px;
+    margin-bottom: 14px;
+  }
+  .scan-block .scan-intro {
+    color: var(--ink-soft);
+    max-width: 760px;
+    margin-bottom: 18px;
+  }
+
+  .swot-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+  .swot-card {
+    padding: 24px;
+  }
+  .swot-card h3 {
+    font-size: 20px;
+    margin-bottom: 12px;
+  }
+  .swot-card ul {
+    list-style: none;
+    display: grid;
+    gap: 9px;
+  }
+  .swot-card li {
+    color: var(--ink-soft);
+    font-size: 15px;
+    padding-left: 24px;
+    position: relative;
+  }
+  .swot-card li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.68em;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--gold);
+  }
+
+  .recommendation-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+  .recommendation-card {
+    padding: 26px;
+  }
+  .recommendation-card .rec-label {
+    font-family: var(--font-mono);
+    color: var(--gold-deep);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 9px;
+  }
+  .recommendation-card h3 {
+    font-size: 19px;
+    margin-bottom: 8px;
+  }
+  .recommendation-card p {
+    color: var(--ink-soft);
+    font-size: 15px;
+  }
+  .final-callout {
+    margin-top: 22px;
+    padding: 28px 30px;
+    background: var(--dark);
+    color: var(--dark-text);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--dark-line);
+  }
+  .final-callout h3 {
+    color: #fff;
+    font-size: 23px;
+    margin-bottom: 8px;
+  }
+  .final-callout p {
+    color: var(--dark-text-soft);
+  }
+
+  .refs-list {
+    display: grid;
+    gap: 11px;
+    font-size: 14.5px;
+    color: var(--ink-soft);
+  }
+  .refs-list a {
+    color: var(--gold-deep);
+    text-decoration: none;
+    word-break: break-word;
+  }
+  .refs-list a:hover { text-decoration: underline; }
+
+  @media (max-width: 920px) {
+    .summary-grid,
+    .value-grid,
+    .process-grid,
+    .model-grid,
+    .swot-grid,
+    .recommendation-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="container nav-inner">
+    <a class="nav-brand" href="../index.html">
+      <img src="../assets/img/group6-logo.png" alt="Group 6 logo">
+    </a>
+    <div class="nav-links">
+      <a href="#overview">Overview</a>
+      <a href="#roles">Roles</a>
+      <a href="#framework">Framework</a>
+      <a href="#attendance">Attendance</a>
+      <a href="#scan">Scan</a>
+      <a href="#recommendation">Recommendation</a>
+      <a href="../index.html">Hub</a>
+    </div>
+  </div>
+</nav>
+
+<header class="a2-hero on-dark" id="overview" data-screen-label="Hero">
+  <div class="container">
+    <p class="crumb"><a href="../index.html">Group 6 Hub</a> / Assignment 02</p>
+    <p class="eyebrow">Strategic Management &middot; Assignment 2</p>
+    <h1>FindYello.com Modernisation Project</h1>
+    <p class="hero-sub">Group roles, working framework, attendance record, and environmental scan</p>
+    <p class="hero-lede">Group 6 selected the redevelopment and modernisation of FindYello.com for Yello Media Group. This page presents the group answer for the current assignment and connects it to Ques 2 of the major group strategic management plan.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-gold" href="#scan">View Environmental Scan</a>
+      <a class="btn btn-ghost-dark" href="#roles">View Assigned Tasks</a>
+      <a class="btn btn-ghost-dark" href="../index.html#checklist">Project Checklist</a>
+    </div>
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-label">Selected Business</div>
+        <div class="stat-value">Yello <span>Media</span></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Project</div>
+        <div class="stat-value">Find<span>Yello</span></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Formal Meeting</div>
+        <div class="stat-value">June <span>28</span></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">CEO</div>
+        <div class="stat-value">Velton <span>G.</span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="section" id="assignment-focus">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">Submission Focus</p>
+      <h2>Assignment 2 begins the main group project</h2>
+      <p class="lede">The course brief asks the group to choose a Jamaican business project and explain the value. This assignment adds the group operating details and the scan needed to justify the project.</p>
+    </div>
+    <div class="summary-grid">
+      <article class="card summary-card reveal">
+        <p class="eyebrow">Main Group Project &middot; Ques 2</p>
+        <h3>Project choice and value rationale</h3>
+        <div class="question-callout">By consensus, choose a project for any Jamaican business for implementation by the Group and say how the Group decided the idea would add value to the company.</div>
+        <p>By consensus, Group 6 selected the redevelopment and modernisation of FindYello.com for Yello Media Group. The proposed project is to reposition FindYello from a legacy online directory into a modern, mobile-first, AI-assisted local business discovery and lead-conversion platform for Jamaica and the wider Caribbean.</p>
+        <p>The upgraded platform would prioritise cleaner search, verified business profiles, better data quality, mobile usability, map and WhatsApp integration, reviews, category pages, and advertiser analytics.</p>
+      </article>
+      <aside class="source-stack">
+        <div class="card source-card reveal">
+          <div class="source-label">Source 01</div>
+          <h3>Major Group Assignment</h3>
+          <p>Provides the full Ques 1-Ques 6 strategic management plan structure for the semester.</p>
+        </div>
+        <div class="card source-card reveal">
+          <div class="source-label">Source 02</div>
+          <h3>The Pivot at NovaFoods</h3>
+          <p>Provides the model for linking strategic intent, external scanning, internal capability analysis, and recommendations.</p>
+        </div>
+        <div class="card source-card reveal">
+          <div class="source-label">Source 03</div>
+          <h3>Assignment 2 Group Answer</h3>
+          <p>Provides the group roles, meeting record, environmental scan, value case, and recommendation for FindYello.com.</p>
+        </div>
+      </aside>
+    </div>
+    <div class="value-grid">
+      <div class="value-card reveal">
+        <div class="value-no">VALUE 01</div>
+        <h4>Consumers</h4>
+        <p>Users can find reliable local businesses faster, with cleaner profiles, maps, messaging, reviews, and better search.</p>
+      </div>
+      <div class="value-card reveal">
+        <div class="value-no">VALUE 02</div>
+        <h4>Advertisers</h4>
+        <p>SMEs can see measurable lead indicators such as profile views, calls, WhatsApp clicks, map directions, and website clicks.</p>
+      </div>
+      <div class="value-card reveal">
+        <div class="value-no">VALUE 03</div>
+        <h4>Yello Media Group</h4>
+        <p>The company can turn its historic directory advantage into a modern local-discovery platform advantage.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="roles" data-screen-label="Group Roles">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">Section 01 &middot; Roles</p>
+      <h2>Group members, CEO, and assigned tasks</h2>
+      <p class="lede">Group 6 selected Velton Gooden Jr. as Group CEO by consensus, with a dual CEO/CTO function for this stage because the selected project is a digital platform redevelopment.</p>
+    </div>
+    <p class="role-note">The CEO selection was based on the need for coordination, clear communication, document consolidation, and technical direction for the FindYello.com modernisation project.</p>
+    <div class="table-wrap reveal">
+      <table class="data">
+        <thead>
+          <tr>
+            <th>Group Member</th>
+            <th>Role</th>
+            <th>Assigned Task(s)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="member-name">Velton Gooden Jr.</td>
+            <td><span class="tag">CEO / CTO</span></td>
+            <td>Coordinate the group, guide the strategic direction, consolidate and finalise the document, submit the assignment, and lead the technical/platform analysis for FindYello.com.</td>
+          </tr>
+          <tr>
+            <td class="member-name">Tywan S Hamilton</td>
+            <td><span class="tag">CMO</span></td>
+            <td>Support the marketing, customer experience, brand positioning, competitor, and presentation-related areas of the project.</td>
+          </tr>
+          <tr>
+            <td class="member-name">Ryanna Graham</td>
+            <td><span class="tag">CFO</span></td>
+            <td>Support economic analysis, financial/value considerations, cost-benefit thinking, editing, and proofreading.</td>
+          </tr>
+          <tr>
+            <td class="member-name">Tamina-Shimone Green</td>
+            <td><span class="tag">COO</span></td>
+            <td>Support operations, workflow, administration, internal process analysis, and accountability tracking.</td>
+          </tr>
+          <tr>
+            <td class="member-name">Shanice Hamilton</td>
+            <td><span class="tag">Chief Communications Officer</span></td>
+            <td>Support written communication, customer/social analysis, presentation support, and clarity of the final response.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="framework" data-screen-label="Framework">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">Section 02 &middot; Framework</p>
+      <h2>How the group approached the assignment</h2>
+      <p class="lede">Group 6 used a simple strategic-management workflow to move from assignment requirements to project choice, research, task allocation, and final consolidation.</p>
+    </div>
+    <div class="process-grid">
+      <div class="process-step reveal">
+        <div class="step-no">01</div>
+        <div>
+          <h3>Review the assignment requirements</h3>
+          <p>The group confirmed that this submission required group roles, the group approach, attendance, and an environmental scan.</p>
+        </div>
+      </div>
+      <div class="process-step reveal">
+        <div class="step-no">02</div>
+        <div>
+          <h3>Hold the formal check-in</h3>
+          <p>One formal group meeting/check-in was held on June 28 to discuss the assignment, select FindYello.com, and agree on the initial task split.</p>
+        </div>
+      </div>
+      <div class="process-step reveal">
+        <div class="step-no">03</div>
+        <div>
+          <h3>Confirm the project focus</h3>
+          <p>The group framed the project as redeveloping FindYello.com into a modern local business discovery and lead-generation platform.</p>
+        </div>
+      </div>
+      <div class="process-step reveal">
+        <div class="step-no">04</div>
+        <div>
+          <h3>Coordinate through Telegram</h3>
+          <p>Telegram was used for follow-up communication, updates, explanations for absence, and coordination of next steps.</p>
+        </div>
+      </div>
+      <div class="process-step reveal">
+        <div class="step-no">05</div>
+        <div>
+          <h3>Assign tasks by executive role</h3>
+          <p>Tasks were distributed across management, marketing, finance/value, operations, communications, and technology.</p>
+        </div>
+      </div>
+      <div class="process-step reveal">
+        <div class="step-no">06</div>
+        <div>
+          <h3>Research, scan, and consolidate</h3>
+          <p>The group used public sources, group-provided internal context, and strategic-management concepts to prepare the scan and final document.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="attendance" data-screen-label="Attendance">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">Section 03 &middot; Attendance</p>
+      <h2>Meeting and attendance record</h2>
+      <p class="lede">The group met once formally for this stage of the assignment. Absence explanations were based on Telegram updates provided by members after the meeting.</p>
+    </div>
+    <div class="table-wrap reveal">
+      <table class="data">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Meeting / Purpose</th>
+            <th>Member</th>
+            <th>Attendance</th>
+            <th>Task / Contribution</th>
+            <th>Explanation / Comment</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>June 28</td>
+            <td>Project selection and task split</td>
+            <td class="member-name">Velton Gooden Jr.</td>
+            <td><span class="tag">Present</span></td>
+            <td>CEO/CTO; led discussion, project framing, task split and final consolidation.</td>
+            <td>Attended and participated in selecting FindYello as the project.</td>
+          </tr>
+          <tr>
+            <td>June 28</td>
+            <td>Project selection and task split</td>
+            <td class="member-name">Tywan S Hamilton</td>
+            <td><span class="tag">Present</span></td>
+            <td>CMO; supported discussion on project direction, marketing/customer value and presentation.</td>
+            <td>Attended and participated in selecting FindYello as the project.</td>
+          </tr>
+          <tr>
+            <td>June 28</td>
+            <td>Project selection and task split</td>
+            <td class="member-name">Tamina-Shimone Green</td>
+            <td><span class="tag neutral">Absent; update sent</span></td>
+            <td>COO; operations and internal process support.</td>
+            <td>Explained that she had to handle an accident involving one of her cars and asked what she needed to do.</td>
+          </tr>
+          <tr>
+            <td>June 28</td>
+            <td>Project selection and task split</td>
+            <td class="member-name">Shanice Hamilton</td>
+            <td><span class="tag neutral">Absent; update sent</span></td>
+            <td>Chief Communications Officer; writing, communication and presentation support.</td>
+            <td>Explained that she was in the hospital and asked what she needed to do.</td>
+          </tr>
+          <tr>
+            <td>June 28</td>
+            <td>Project selection and task split</td>
+            <td class="member-name">Ryanna Graham</td>
+            <td><span class="tag neutral">Absent; update sent</span></td>
+            <td>CFO; economic/value analysis and editing support.</td>
+            <td>Sent an apology for absence and asked which part of the assignment she should complete.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="case-model" data-screen-label="NovaFoods Model">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">Case Study Link</p>
+      <h2>How the NovaFoods case shaped the scan</h2>
+      <p class="lede">The NovaFoods case demonstrated how a strategic recommendation should connect external conditions, internal capabilities, and practical implementation choices. Group 6 used the same logic for FindYello.com.</p>
+    </div>
+    <div class="model-grid">
+      <article class="card model-card reveal">
+        <div class="model-label">01</div>
+        <h3>Strategic intent</h3>
+        <p>Define the future direction of the business and the core problem that makes the pivot necessary.</p>
+      </article>
+      <article class="card model-card reveal">
+        <div class="model-label">02</div>
+        <h3>External scan</h3>
+        <p>Use macro and industry tools such as PESTEL and Five Forces to identify opportunities and threats.</p>
+      </article>
+      <article class="card model-card reveal">
+        <div class="model-label">03</div>
+        <h3>Internal capability</h3>
+        <p>Review strengths, weaknesses, resources, data, relationships, technology, and operating gaps.</p>
+      </article>
+      <article class="card model-card reveal">
+        <div class="model-label">04</div>
+        <h3>Recommendations</h3>
+        <p>Turn the scan into practical priorities that match the company's strengths with market opportunities.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="scan" data-screen-label="Environmental Scan">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">Section 04 &middot; Environmental Scan</p>
+      <h2>FindYello.com project scan</h2>
+      <p class="lede">This scan combines external and internal analysis because strategic management requires identifying opportunities, threats, strengths, and weaknesses before choosing a practical strategy.</p>
+    </div>
+    <div class="scan-nav">
+      <a href="#context">Context</a>
+      <a href="#internal-scan">Internal</a>
+      <a href="#pestel">PESTEL</a>
+      <a href="#competition">Competition</a>
+      <a href="#forces">Forces</a>
+      <a href="#swot">SWOT</a>
+    </div>
+
+    <div class="scan-block" id="context">
+      <h3>Company and strategic context</h3>
+      <p class="scan-intro">Yello Media Group is a multimedia marketing company serving the Caribbean, Latin America and the Channel Islands. Its website states that it serves 19 countries and 32,000+ customers. Its LinkedIn profile describes a legacy network of print telephone directories, online properties, unique visitors, and annual searches.</p>
+      <p class="scan-intro">The company began from the traditional telephone directory/Yellow Pages model. Search engines, smartphones, social media, Google Maps, online reviews and WhatsApp have changed how people discover and contact businesses, weakening the old advantage of owning the printed directory.</p>
+    </div>
+
+    <div class="scan-block" id="internal-scan">
+      <h3>Internal environmental scan</h3>
+      <p class="scan-intro">The internal scan shows that FindYello has brand recognition, regional scale, and existing business relationships, but the project must address platform weakness, strategic dilution, and data-quality risk.</p>
+      <div class="table-wrap reveal">
+        <table class="data">
+          <thead>
+            <tr>
+              <th>Internal Area</th>
+              <th>Finding</th>
+              <th>Strategic Meaning</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Brand equity</strong></td>
+              <td>FindYello benefits from strong legacy recognition from the Yellow Pages and telephone-directory tradition.</td>
+              <td>This creates trust and awareness that newer directory platforms may not have.</td>
+            </tr>
+            <tr>
+              <td><strong>Regional scale</strong></td>
+              <td>Yello has operated across multiple Caribbean and related markets and publicly states that it serves 19 countries and 32,000+ customers.</td>
+              <td>The platform can be positioned as a regional local-discovery network, not only a Jamaica directory.</td>
+            </tr>
+            <tr>
+              <td><strong>Existing data and relationships</strong></td>
+              <td>Yello already has business listings, categories, advertisers and client relationships.</td>
+              <td>The redevelopment can build on existing data and advertiser relationships rather than starting from zero.</td>
+            </tr>
+            <tr>
+              <td><strong>Product and platform weakness</strong></td>
+              <td>Group-provided internal context indicates that the platform has suffered from outdated systems, slow product development and an overly sales-led approach.</td>
+              <td>The project must include product governance, user research, a product roadmap, analytics and continuous improvement.</td>
+            </tr>
+            <tr>
+              <td><strong>Strategic dilution</strong></td>
+              <td>Yello previously offered broad digital marketing services including websites, social media management and SEM.</td>
+              <td>Broad services can produce revenue, but they may distract from FindYello as the company's strongest proprietary asset.</td>
+            </tr>
+            <tr>
+              <td><strong>Data quality risk</strong></td>
+              <td>Directories lose value when phone numbers, locations, opening hours, categories, photos and business status are inaccurate or duplicated.</td>
+              <td>Listing verification, clean data and easy self-service updates should be core priorities.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="scan-block" id="pestel">
+      <h3>External macro scan: PESTEL</h3>
+      <p class="scan-intro">The PESTEL scan identifies the broad conditions shaping the project: SME digital transformation, cautious marketing spend, mobile consumer expectations, global platform competition, paper-light opportunities, and data-protection obligations.</p>
+      <div class="table-wrap reveal">
+        <table class="data">
+          <thead>
+            <tr>
+              <th>Factor</th>
+              <th>Key Issues</th>
+              <th>Implication for FindYello</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Political / Governmental</strong></td>
+              <td>Regional governments and business-support bodies continue to encourage digital transformation and SME modernisation.</td>
+              <td>FindYello can position itself as infrastructure for business discovery and SME visibility across Jamaica and the Caribbean.</td>
+            </tr>
+            <tr>
+              <td><strong>Economic</strong></td>
+              <td>Businesses need affordable customer acquisition, but inflation and operating costs make them more cautious with marketing spend.</td>
+              <td>FindYello must prove return on investment through analytics such as profile views, calls, WhatsApp clicks, map directions and lead indicators.</td>
+            </tr>
+            <tr>
+              <td><strong>Social</strong></td>
+              <td>Jamaica is highly connected, with high internet penetration and heavy social media use.</td>
+              <td>Users expect fast, mobile-friendly discovery with contact details, maps, social links, reviews, photos and instant messaging.</td>
+            </tr>
+            <tr>
+              <td><strong>Technological</strong></td>
+              <td>Google Business Profile is free and places businesses in Google Search and Maps. Social platforms and map tools also shape discovery.</td>
+              <td>FindYello must compete through local relevance, verified data, AI-assisted search, stronger category pages and advertiser insights.</td>
+            </tr>
+            <tr>
+              <td><strong>Environmental</strong></td>
+              <td>A stronger digital platform reduces dependence on printed directories, but digital platforms should remain accessible on older devices and slower data connections.</td>
+              <td>The redevelopment should support a paper-light model while keeping the platform fast, efficient and inclusive.</td>
+            </tr>
+            <tr>
+              <td><strong>Legal</strong></td>
+              <td>Jamaica's data-protection environment requires attention to registration, data protection officers where applicable, annual impact assessments and the eight data standards.</td>
+              <td>If FindYello expands reviews, analytics, AI search and user accounts, it must include privacy, consent, moderation, accuracy and security controls.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="scan-block" id="competition">
+      <h3>Competitive environment</h3>
+      <p class="scan-intro">FindYello competes with global search platforms, social media, WhatsApp, tourism review platforms, free directories, and newer locally positioned directory products.</p>
+      <div class="table-wrap reveal">
+        <table class="data">
+          <thead>
+            <tr>
+              <th>Competitor / Substitute</th>
+              <th>Evidence</th>
+              <th>Strategic Impact</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Google Business Profile / Google Maps</strong></td>
+              <td>Businesses can create a free Business Profile and appear in Google Search and Maps.</td>
+              <td>The strongest substitute. It is free, familiar and tied to where many consumers already search.</td>
+            </tr>
+            <tr>
+              <td><strong>Social media and WhatsApp</strong></td>
+              <td>Jamaica has heavy social platform use, and many businesses use messaging as a practical online presence.</td>
+              <td>Reduces dependence on directories and raises expectations for instant contact.</td>
+            </tr>
+            <tr>
+              <td><strong>JamaicaIndex</strong></td>
+              <td>JamaicaIndex presents category-based business directory coverage with advanced search options.</td>
+              <td>A direct local directory competitor with category-based discovery.</td>
+            </tr>
+            <tr>
+              <td><strong>WorkandJam</strong></td>
+              <td>WorkandJam offers Jamaica business search by category, map, parish/island and local business categories.</td>
+              <td>Competes by being locally oriented and map/category focused.</td>
+            </tr>
+            <tr>
+              <td><strong>ZipLeaf Jamaica</strong></td>
+              <td>ZipLeaf describes itself as one of Jamaica's largest online business directories and offers free business listing.</td>
+              <td>Competes for businesses seeking simple, free visibility.</td>
+            </tr>
+            <tr>
+              <td><strong>Ezy Web Pro Directory</strong></td>
+              <td>Ezy Web Pro positions its directory around verified listings, WhatsApp buttons, Google Maps integration, dedicated URLs, mobile-friendly design and schema markup.</td>
+              <td>Shows how newer competitors are selling modern features that FindYello must match or exceed.</td>
+            </tr>
+            <tr>
+              <td><strong>TripAdvisor and tourism platforms</strong></td>
+              <td>Tourism-focused platforms carry review weight and tourist traffic for restaurants, attractions, hotels, tours and experiences.</td>
+              <td>Strong substitute for tourism and hospitality categories.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="scan-block" id="forces">
+      <h3>Industry forces summary</h3>
+      <p class="scan-intro">The market is attractive because local discovery remains important, but the competitive pressure is high. FindYello must differentiate through trust, local data quality, usability, and measurable advertiser value.</p>
+      <div class="table-wrap reveal">
+        <table class="data">
+          <thead>
+            <tr>
+              <th>Force</th>
+              <th>Strength</th>
+              <th>Rationale</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Threat of substitutes</strong></td>
+              <td><span class="tag neutral">High</span></td>
+              <td>Google Search, Google Maps, social media, WhatsApp, TripAdvisor and free directories already satisfy many discovery needs.</td>
+            </tr>
+            <tr>
+              <td><strong>Competitive rivalry</strong></td>
+              <td><span class="tag neutral">High</span></td>
+              <td>FindYello competes with global platforms, local directories and digital agencies for business visibility budgets and consumer attention.</td>
+            </tr>
+            <tr>
+              <td><strong>Buyer power</strong></td>
+              <td><span class="tag neutral">High</span></td>
+              <td>SMEs can choose free or low-cost alternatives and will demand proof that paid listings produce leads.</td>
+            </tr>
+            <tr>
+              <td><strong>Threat of new entrants</strong></td>
+              <td><span class="tag">Medium</span></td>
+              <td>Directory pages are easy to launch, but building trusted data, traffic, reviews and advertiser relationships is harder.</td>
+            </tr>
+            <tr>
+              <td><strong>Supplier power</strong></td>
+              <td><span class="tag">Medium</span></td>
+              <td>Technology vendors, hosting providers, data providers and AI/search tools matter, but Yello can reduce dependency through internal product capability.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="scan-block" id="swot">
+      <h3>SWOT summary</h3>
+      <div class="swot-grid">
+        <article class="card swot-card reveal">
+          <h3>Strengths</h3>
+          <ul>
+            <li>Strong legacy brand recognition.</li>
+            <li>Regional footprint.</li>
+            <li>Existing listings and advertiser relationships.</li>
+            <li>History in local search.</li>
+            <li>Known Caribbean business-information role.</li>
+          </ul>
+        </article>
+        <article class="card swot-card reveal">
+          <h3>Weaknesses</h3>
+          <ul>
+            <li>Outdated platform experience.</li>
+            <li>Possible data-quality issues.</li>
+            <li>Slow product development.</li>
+            <li>Overextension into broad service lines.</li>
+            <li>Weaker relevance among younger users who default to Google and social media.</li>
+          </ul>
+        </article>
+        <article class="card swot-card reveal">
+          <h3>Opportunities</h3>
+          <ul>
+            <li>AI-assisted local search.</li>
+            <li>Verified listings.</li>
+            <li>WhatsApp and map integration.</li>
+            <li>Analytics for advertisers.</li>
+            <li>Regional category pages.</li>
+            <li>Listing management across wider platform networks.</li>
+          </ul>
+        </article>
+        <article class="card swot-card reveal">
+          <h3>Threats</h3>
+          <ul>
+            <li>Google Business Profile and Maps.</li>
+            <li>Social media discovery.</li>
+            <li>Free directory competitors.</li>
+            <li>Fake reviews and moderation risk.</li>
+            <li>Data-protection obligations.</li>
+            <li>Customer distrust caused by inaccurate or outdated listings.</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="recommendation" data-screen-label="Recommendation">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">Section 05 &middot; Recommendation</p>
+      <h2>Strategic implications and recommendation</h2>
+      <p class="lede">The scan shows that FindYello's problem is not awareness. The core issue is relevance: whether consumers and businesses see FindYello as faster, more accurate, more trusted and more useful than the alternatives.</p>
+    </div>
+    <div class="recommendation-grid">
+      <article class="card recommendation-card reveal">
+        <div class="rec-label">Priority 01</div>
+        <h3>Modernise the product</h3>
+        <p>Improve mobile performance, search, business profiles, maps, WhatsApp/contact buttons, reviews and intuitive navigation.</p>
+      </article>
+      <article class="card recommendation-card reveal">
+        <div class="rec-label">Priority 02</div>
+        <h3>Rebuild data trust</h3>
+        <p>Prioritise verification, duplicate removal, updated categories and easy profile updates for business owners.</p>
+      </article>
+      <article class="card recommendation-card reveal">
+        <div class="rec-label">Priority 03</div>
+        <h3>Add AI-assisted discovery</h3>
+        <p>Support natural-language searches such as "find a plumber near Portmore open today" or "family lawyer in Kingston with reviews."</p>
+      </article>
+      <article class="card recommendation-card reveal">
+        <div class="rec-label">Priority 04</div>
+        <h3>Prove advertiser value</h3>
+        <p>Show views, calls, direction requests, WhatsApp clicks, website clicks and other lead indicators in advertiser dashboards.</p>
+      </article>
+    </div>
+    <div class="final-callout reveal">
+      <h3>Final value case</h3>
+      <p>This project would add value by turning Yello's historic directory advantage into a modern local-discovery advantage. It would help consumers find reliable businesses faster and help businesses gain measurable visibility, credibility and customer leads.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="references" data-screen-label="References">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">Appendix</p>
+      <h2>References</h2>
+      <p class="lede">Reference list carried forward from the Assignment 2 document.</p>
+    </div>
+    <details class="accordion reveal" open>
+      <summary>Assignment 2 reference list</summary>
+      <div class="accordion-body">
+        <div class="refs-list">
+          <p>DataReportal. (2025, November 8). <em>Digital 2026: Jamaica.</em> <a href="https://datareportal.com/reports/digital-2026-jamaica" target="_blank" rel="noopener">https://datareportal.com/reports/digital-2026-jamaica</a></p>
+          <p>David, F. R., &amp; David, F. R. (2017). <em>Strategic management: Concepts and cases: A competitive advantage approach</em> (16th ed.). Pearson.</p>
+          <p>Ezy Web Pro. (2026, April 12). <em>Best business directories in Jamaica 2026: Where should you list?</em> <a href="https://ezywebpro.com/blog/best-business-directories-jamaica/" target="_blank" rel="noopener">https://ezywebpro.com/blog/best-business-directories-jamaica/</a></p>
+          <p>Google. (n.d.). <em>Get listed on Google: Google Business Profile.</em> Retrieved July 4, 2026, from <a href="https://business.google.com/en-all/business-profile/" target="_blank" rel="noopener">https://business.google.com/en-all/business-profile/</a></p>
+          <p>Jamaica Observer. (2025, August 13). <em>From print to platform: Yello Media evolves into digital powerhouse.</em> <a href="https://www.jamaicaobserver.com/2025/08/13/print-platform-yello-media-evolves-digital-powerhouse/" target="_blank" rel="noopener">https://www.jamaicaobserver.com/2025/08/13/print-platform-yello-media-evolves-digital-powerhouse/</a></p>
+          <p>JamaicaIndex. (n.d.). <em>Find a business by category.</em> Retrieved July 4, 2026, from <a href="https://www.jamaicaindex.com/browse-business-directory" target="_blank" rel="noopener">https://www.jamaicaindex.com/browse-business-directory</a></p>
+          <p>Office of the Information Commissioner. (2023, November 29). <em>Obligations of data controllers under the Data Protection Act.</em> <a href="https://oic.gov.jm/press-release/obligations-data-controllers-under-data-protection-act-dpa" target="_blank" rel="noopener">https://oic.gov.jm/press-release/obligations-data-controllers-under-data-protection-act-dpa</a></p>
+          <p>Our Today. (2025, August 21). <em>Yello Media Group undergoes strategic shift to proprietary platforms.</em> <a href="https://our.today/yello-media-group-undergoes-strategic-shift-to-proprietary-platforms/" target="_blank" rel="noopener">https://our.today/yello-media-group-undergoes-strategic-shift-to-proprietary-platforms/</a></p>
+          <p>University of the Commonwealth Caribbean. (2026). <em>Case study: The pivot at NovaFoods</em> [Course handout].</p>
+          <p>WorkandJam. (n.d.). <em>Jamaica business directory.</em> Retrieved July 4, 2026, from <a href="https://www.workandjam.com/" target="_blank" rel="noopener">https://www.workandjam.com/</a></p>
+          <p>Yello Media Group. (n.d.). <em>Yello Media Group.</em> Retrieved July 4, 2026, from <a href="https://yellomediagroup.com/" target="_blank" rel="noopener">https://yellomediagroup.com/</a></p>
+          <p>Yello Media Group. (n.d.-b). <em>Yello Media Group</em> [LinkedIn page]. LinkedIn. Retrieved July 4, 2026, from <a href="https://jm.linkedin.com/company/yellomg" target="_blank" rel="noopener">https://jm.linkedin.com/company/yellomg</a></p>
+          <p>Yello Media Group. (n.d.-c). <em>Yello Media Group Ltd - Advertising agencies.</em> FindYello. Retrieved July 4, 2026, from <a href="https://www.findyello.com/jamaica/yello-media-group-ltd/profile/48-constant-spring/" target="_blank" rel="noopener">https://www.findyello.com/jamaica/yello-media-group-ltd/profile/48-constant-spring/</a></p>
+          <p>ZipLeaf. (n.d.). <em>ZipLeaf Jamaica.</em> Retrieved July 4, 2026, from <a href="https://jm.zipleaf.com/" target="_blank" rel="noopener">https://jm.zipleaf.com/</a></p>
+        </div>
+      </div>
+    </details>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <img src="../assets/img/group6-logo.png" alt="Group 6 logo">
+    </div>
+    <p class="footer-meta"><a href="../index.html">GROUP 6 HUB</a> &middot; ASSIGNMENT 2 &middot; FINDYELLO.COM MODERNISATION PROJECT</p>
+  </div>
+</footer>
+
+<script src="../assets/charts.js"></script>
+</body>
+</html>

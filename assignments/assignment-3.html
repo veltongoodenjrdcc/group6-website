@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Assignment 3 | The Ideal Senior Manager &middot; Group 6</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@500;600;700&family=Source+Sans+3:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css">
+<link rel="stylesheet" href="../assets/charts.css">
+<style>
+  .a3-hero {
+    background:
+      radial-gradient(880px 430px at 82% -8%, rgba(91, 138, 78, 0.22), transparent 62%),
+      radial-gradient(780px 380px at 0% 20%, rgba(189, 147, 53, 0.13), transparent 64%),
+      linear-gradient(180deg, #151D2A 0%, var(--dark) 100%);
+    color: var(--dark-text);
+    padding: 72px 0 80px;
+    border-bottom: 1px solid var(--dark-line);
+  }
+  .a3-hero .crumb {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--dark-text-soft);
+    margin-bottom: 26px;
+  }
+  .a3-hero .crumb a { color: var(--gold-bright); text-decoration: none; }
+  .a3-hero .crumb a:hover { text-decoration: underline; }
+  .a3-hero h1 {
+    font-size: clamp(32px, 4.4vw, 54px);
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.01em;
+    margin: 16px 0 12px;
+    max-width: 880px;
+  }
+  .a3-hero .hero-sub {
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--gold-bright);
+    margin-bottom: 18px;
+  }
+  .a3-hero .hero-lede {
+    font-size: 17.5px;
+    color: var(--dark-text-soft);
+    max-width: 760px;
+    margin-bottom: 30px;
+  }
+  .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+  .a3-hero .stat-grid { margin-top: 50px; }
+
+  .role-note {
+    max-width: 780px;
+    color: var(--ink-soft);
+    margin-bottom: 26px;
+  }
+
+  .framework-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 18px;
+  }
+  .step-card {
+    padding: 24px 26px;
+  }
+  .step-card .step-no {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--gold-deep);
+    letter-spacing: 0.1em;
+    margin-bottom: 10px;
+  }
+  .step-card h3 { font-size: 19px; margin-bottom: 8px; }
+  .step-card p { color: var(--ink-soft); font-size: 15.5px; }
+
+  .shortlist-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+    gap: 18px;
+    margin-top: 30px;
+  }
+  .candidate-card {
+    padding: 28px 28px 26px;
+    position: relative;
+  }
+  .candidate-card.selected {
+    border: 1.6px solid var(--gold);
+    background: linear-gradient(180deg, #FFFDF8 0%, #FFFFFF 55%);
+  }
+  .candidate-pill {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 999px;
+    margin-bottom: 16px;
+  }
+  .pill-selected { background: var(--gold-tint); color: var(--gold-deep); border: 1px solid var(--gold); }
+  .pill-shortlist { background: #EEF1F5; color: var(--ink-soft); border: 1px solid #DDE2EA; }
+  .candidate-card h3 { font-size: 21px; margin-bottom: 4px; }
+  .candidate-card .cred {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--gold-deep);
+    letter-spacing: 0.04em;
+    margin-bottom: 14px;
+  }
+  .candidate-card p { color: var(--ink-soft); font-size: 15px; }
+
+  .justify-panel {
+    background: #FCFBF8;
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--gold);
+    border-radius: var(--radius);
+    padding: 26px 28px;
+    margin-top: 30px;
+  }
+  .justify-panel h3 { font-size: 22px; margin-bottom: 12px; }
+  .justify-panel p { color: var(--ink-soft); margin-bottom: 14px; }
+  .justify-panel p:last-child { margin-bottom: 0; }
+
+  .diagram-frame {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    padding: 34px 30px 26px;
+    margin-top: 30px;
+  }
+  .diagram-frame img { width: 100%; height: auto; }
+  .diagram-caption {
+    font-size: 14px;
+    color: var(--ink-faint);
+    text-align: center;
+    margin-top: 18px;
+  }
+
+  .challenge-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+    gap: 18px;
+    margin-top: 30px;
+  }
+  .challenge-card { padding: 28px; }
+  .challenge-card .ch-no {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--gold-deep);
+    letter-spacing: 0.1em;
+    margin-bottom: 12px;
+  }
+  .challenge-card h3 { font-size: 20px; margin-bottom: 10px; }
+  .challenge-card p { color: var(--ink-soft); font-size: 15.5px; margin-bottom: 14px; }
+  .challenge-card .manage-label {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #3D6B33;
+    margin-bottom: 8px;
+  }
+  .challenge-card ul { list-style: none; display: grid; gap: 8px; }
+  .challenge-card li {
+    display: grid;
+    grid-template-columns: 20px 1fr;
+    gap: 8px;
+    color: var(--ink-soft);
+    font-size: 14.5px;
+  }
+  .challenge-card li::before { content: "\2713"; color: #3D6B33; font-weight: 700; }
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="container nav-inner">
+    <a class="nav-brand" href="../index.html">
+      <img src="../assets/img/group6-logo.png" alt="Group 6 logo">
+    </a>
+    <div class="nav-links">
+      <a href="#overview">Overview</a>
+      <a href="#roles">Roles</a>
+      <a href="#framework">Framework</a>
+      <a href="#attendance">Attendance</a>
+      <a href="#recruitment">Recruitment</a>
+      <a href="#structure">Structure</a>
+      <a href="#challenges">Challenges</a>
+      <a href="../index.html">Hub</a>
+    </div>
+  </div>
+</nav>
+
+<header class="a3-hero on-dark" id="overview" data-screen-label="Hero">
+  <div class="container">
+    <p class="crumb"><a href="../index.html">Group 6 Hub</a> / Assignment 03</p>
+    <p class="eyebrow">Strategic Management &middot; Assignment 3</p>
+    <h1>The Ideal Senior Manager in Charge of Strategic Management</h1>
+    <p class="hero-sub">Group roles, working framework, organisational structure, and the appointment of the engagement lead</p>
+    <p class="hero-lede">For this assignment Group 6 operates as an independent strategic management consultancy engaged by Yello Media Group, the client, to deliver the FindYello.com modernisation project. The group ran a quasi-recruitment process to appoint the Senior Manager in charge of Strategic Management and designed the organisational structure needed to deliver the engagement.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-gold" href="#recruitment">See the Appointment</a>
+      <a class="btn btn-ghost-dark" href="#structure">View the Structure</a>
+      <a class="btn btn-ghost-dark" href="../index.html#checklist">Project Checklist</a>
+    </div>
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-label">Operating As</div>
+        <div class="stat-value">Consul<span>tancy</span></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Structure</div>
+        <div class="stat-value">Matrix <span>Org</span></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Formal Meeting</div>
+        <div class="stat-value">July <span>8</span></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Appointed</div>
+        <div class="stat-value">K. <span>Muir</span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="section" id="roles">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">Section 01 &middot; Roles</p>
+      <h2>Group members, CEO, and assigned tasks</h2>
+      <p class="lede">Velton Gooden Jr. continues as Group CEO with a dual CEO/CTO function, a selection the group made by consensus at the start of the project because this engagement is a digital platform redevelopment.</p>
+    </div>
+    <p class="role-note">For Assignment 3 the tasks were split along the structure of the question itself, with each member owning a numbered part and the CEO consolidating the whole into the final submission.</p>
+    <div class="table-wrap reveal">
+      <table class="data">
+        <thead>
+          <tr>
+            <th>Group Member</th>
+            <th>Role</th>
+            <th>Assigned Task(s)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="member-name">Velton Gooden Jr.</td>
+            <td>CEO / CTO</td>
+            <td>Parts 1 and 2 (group roles, working framework, and attendance record), plus formatting, consolidation, and final submission of the assignment.</td>
+          </tr>
+          <tr>
+            <td class="member-name">Ryanna Graham</td>
+            <td>CFO</td>
+            <td>Part 3A: identify and describe the type of organisational structure for the business and project.</td>
+          </tr>
+          <tr>
+            <td class="member-name">Tamina-Shimone Green</td>
+            <td>COO</td>
+            <td>Part 3B: represent the structure by diagram, including the Senior Manager in charge of Strategic Management and all reporting lines.</td>
+          </tr>
+          <tr>
+            <td class="member-name">Tywan S Hamilton</td>
+            <td>CMO</td>
+            <td>Part 3C: identify three challenges the group foresees and how it intends to manage them to smooth operations and minimise conflict daily.</td>
+          </tr>
+          <tr>
+            <td class="member-name">Shanice Hamilton</td>
+            <td>Chief Communications Officer</td>
+            <td>Final-read review of the combined response for clarity and consistency ahead of submission.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="section alt" id="framework">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">Section 02 &middot; Framework</p>
+      <h2>How the group approached the assignment</h2>
+      <p class="lede">Group 6 held one formal meeting for this assignment, the Group 6 Assignment 3 Discussion on Wednesday 8 July from 7:00 to 7:30 PM via Google Meet, with follow-up coordination handled through the group's Telegram channel.</p>
+    </div>
+    <div class="framework-steps">
+      <article class="card step-card reveal">
+        <div class="step-no">01</div>
+        <h3>Review the assignment requirements</h3>
+        <p>The group confirmed the deliverables: roles and tasks, the working framework and attendance record, and the three-part organisational structure question.</p>
+      </article>
+      <article class="card step-card reveal">
+        <div class="step-no">02</div>
+        <h3>Hold the formal meeting</h3>
+        <p>The Group 6 Assignment 3 Discussion was held via Google Meet on 8 July to settle the approach and divide the work.</p>
+      </article>
+      <article class="card step-card reveal">
+        <div class="step-no">03</div>
+        <h3>Frame the consultancy model</h3>
+        <p>The group agreed that Group 6 operates as an independent consultancy firm assisting FindYello with the revamp project, so Yello Media Group is the client and Group 6 remains its own organisation.</p>
+      </article>
+      <article class="card step-card reveal">
+        <div class="step-no">04</div>
+        <h3>Run the quasi-recruitment process</h3>
+        <p>Rather than inventing a role holder, the group shortlisted real Jamaican professionals from LinkedIn and assessed them against the needs of the engagement.</p>
+      </article>
+      <article class="card step-card reveal">
+        <div class="step-no">05</div>
+        <h3>Assign tasks by question part</h3>
+        <p>Each member took ownership of a numbered part of the assignment, with the CEO carrying the framework, attendance, and final consolidation.</p>
+      </article>
+      <article class="card step-card reveal">
+        <div class="step-no">06</div>
+        <h3>Consolidate and submit</h3>
+        <p>Member contributions were reviewed, harmonised into one voice, formatted, and submitted through Moodle alongside the updated project website.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="attendance">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">Section 03 &middot; Attendance</p>
+      <h2>Meeting and attendance record</h2>
+      <p class="lede">One formal meeting was held for this assignment. The record below covers the Group 6 Assignment 3 Discussion of Wednesday 8 July, 7:00 to 7:30 PM, conducted via Google Meet.</p>
+    </div>
+    <div class="table-wrap reveal">
+      <table class="data">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Meeting / Purpose</th>
+            <th>Member</th>
+            <th>Attendance</th>
+            <th>Task / Contribution</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>July 8</td>
+            <td>Assignment 3 Discussion (Google Meet)</td>
+            <td class="member-name">Velton Gooden Jr.</td>
+            <td>Present</td>
+            <td>Chaired the meeting; proposed the consultancy framing and the quasi-recruitment approach; took parts 1, 2, and final formatting.</td>
+          </tr>
+          <tr>
+            <td>July 8</td>
+            <td>Assignment 3 Discussion (Google Meet)</td>
+            <td class="member-name">Ryanna Graham</td>
+            <td>Present</td>
+            <td>Assigned part 3A, the identification and description of the organisational structure.</td>
+          </tr>
+          <tr>
+            <td>July 8</td>
+            <td>Assignment 3 Discussion (Google Meet)</td>
+            <td class="member-name">Tamina-Shimone Green</td>
+            <td>Present</td>
+            <td>Assigned part 3B, the structure diagram with all reporting lines.</td>
+          </tr>
+          <tr>
+            <td>July 8</td>
+            <td>Assignment 3 Discussion (Google Meet)</td>
+            <td class="member-name">Tywan S Hamilton</td>
+            <td>Present</td>
+            <td>Assigned part 3C, the three foreseen challenges and their management.</td>
+          </tr>
+          <tr>
+            <td>July 8</td>
+            <td>Assignment 3 Discussion (Google Meet)</td>
+            <td class="member-name">Shanice Hamilton</td>
+            <td>Present</td>
+            <td>Assigned the final-read review of the combined response before submission.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="section alt" id="recruitment">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">Section 04 &middot; Recruitment</p>
+      <h2>Appointing the Senior Manager in charge of Strategic Management</h2>
+      <p class="lede">Given the business and the nature of the project, the group ran a quasi-recruitment process: three Jamaican professionals with public LinkedIn profiles were shortlisted and assessed against the demands of a digital platform modernisation delivered by an external consultancy.</p>
+    </div>
+    <div class="shortlist-grid">
+      <article class="card candidate-card selected reveal">
+        <span class="candidate-pill pill-selected">Selected</span>
+        <h3>Keisha Muir</h3>
+        <p class="cred">BSc &middot; EMBA &middot; LLB &middot; PMP</p>
+        <p>Senior Project Management Consultant at Digicel Group, with earlier consulting engagements in data management and banking and a previous tenure as an IT Director. Brings certified project discipline, enterprise technology leadership, and strategic business training to the engagement.</p>
+      </article>
+      <article class="card candidate-card reveal">
+        <span class="candidate-pill pill-shortlist">Shortlisted</span>
+        <h3>Carou Ralph</h3>
+        <p class="cred">Executive Director, Digital Transformation &amp; Innovation, Yello Media Group</p>
+        <p>Deep, direct knowledge of the client's digital transformation agenda. Precisely because he sits inside the client organisation, appointing him to lead the consultancy's engagement would compromise the independence that gives Group 6's recommendations their value.</p>
+      </article>
+      <article class="card candidate-card reveal">
+        <span class="candidate-pill pill-shortlist">Shortlisted</span>
+        <h3>Kim Lee</h3>
+        <p class="cred">Renovator, Ideator, Creator, Developer</p>
+        <p>A creative and product-minded professional whose strengths sit closest to ideation and build execution. Those capabilities serve the project best within delivery workstreams rather than in the senior strategic management seat this engagement requires.</p>
+      </article>
+    </div>
+    <div class="justify-panel reveal">
+      <h3>Why Keisha Muir is the ideal appointment</h3>
+      <p>The FindYello.com modernisation is, at its core, a large digital delivery programme wrapped inside a strategic repositioning. The Senior Manager in charge of Strategic Management must therefore hold two competencies at once: the strategic judgement to keep the engagement aligned with Yello Media Group's long-term direction, and the delivery discipline to move a complex technology programme through scoping, execution, and handover without drift.</p>
+      <p>Muir's profile answers both. Her PMP certification and current role as Senior Project Management Consultant at Digicel Group, one of the Caribbean's largest telecommunications and digital services companies, demonstrate proven capacity to run technology programmes at regional scale. Her consulting history in data management speaks directly to the single most important asset in a directory business: the accuracy, verification, and governance of listing data. Her earlier experience leading projects in banking that improved customer experience and data availability mirrors the consumer-facing and analytics ambitions of the FindYello revamp, and her tenure as an IT Director shows she has carried enterprise technology accountability, not merely advised on it.</p>
+      <p>Her academic formation completes the case. The EMBA supplies the strategic management frameworks the role is named for, while the LLB adds working fluency in contracts and data protection obligations, both live concerns for a platform handling business listings and consumer data across multiple jurisdictions. As an external, independent professional, she also preserves the consultancy's objectivity in a way a client-side executive could not. Group 6 will work in conjunction with her, with the CEO/CTO retaining overall accountability for the engagement.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="structure">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">Section 05 &middot; Structure (3A)</p>
+      <h2>A matrix organisational structure</h2>
+      <p class="lede">Group 6 operates the consultancy as a matrix organisation, overlaying a project reporting axis on a functional executive axis.</p>
+    </div>
+    <div class="summary-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:22px;align-items:start;">
+      <article class="card" style="padding:30px 32px;">
+        <p class="eyebrow">The Functional Axis</p>
+        <h3 style="font-size:22px;margin:10px 0 12px;">Executive specialisms</h3>
+        <p style="color:var(--ink-soft);">Each member holds a permanent functional role: marketing, finance, operations, and communications, under the administrative authority of the CEO/CTO. This preserves clear ownership of each discipline and a stable home for skills, standards, and accountability between engagements.</p>
+      </article>
+      <article class="card" style="padding:30px 32px;">
+        <p class="eyebrow">The Project Axis</p>
+        <h3 style="font-size:22px;margin:10px 0 12px;">The FindYello engagement</h3>
+        <p style="color:var(--ink-soft);">The Senior Manager in charge of Strategic Management leads the FindYello engagement and draws on each function through dedicated project workstreams. Team members therefore answer to the CEO/CTO administratively and to the Senior Manager for project delivery.</p>
+      </article>
+      <article class="card" style="padding:30px 32px;">
+        <p class="eyebrow">Why Not the Alternatives</p>
+        <h3 style="font-size:22px;margin:10px 0 12px;">Fit over fashion</h3>
+        <p style="color:var(--ink-soft);">A purely functional structure would silo the client work; a fully projectised structure would dissolve the consultancy's permanent identity into a single engagement. The matrix keeps both: a durable firm and a focused project team, which is how professional services firms of this size typically deliver client work.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section alt" id="diagram">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">Section 06 &middot; Diagram (3B)</p>
+      <h2>The structure, drawn</h2>
+      <p class="lede">The diagram shows the Senior Manager in charge of Strategic Management within the matrix, with every reporting line: solid administrative lines to the CEO/CTO, dotted project lines to the Senior Manager, and a dashed external relationship to the client.</p>
+    </div>
+    <div class="diagram-frame reveal">
+      <img src="../assets/img/org-structure.png" alt="Group 6 matrix organisational structure showing the CEO/CTO at the top, four functional executives with solid administrative reporting lines, the Senior Manager in charge of Strategic Management leading four project workstreams through dotted project reporting lines, and a dashed external relationship to the client, Yello Media Group">
+      <p class="diagram-caption">Group 6 Consultancy matrix structure for the FindYello.com modernisation engagement.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="challenges">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">Section 07 &middot; Challenges (3C)</p>
+      <h2>Three foreseen challenges and how the group will manage them</h2>
+      <p class="lede">Each challenge below is specific to this organisation: a small matrix consultancy of part-time student-consultants serving an external client. For each, the group has defined the daily management practices intended to smooth operations and minimise conflict.</p>
+    </div>
+    <div class="challenge-grid">
+      <article class="card challenge-card reveal">
+        <div class="ch-no">Challenge 01</div>
+        <h3>Dual reporting and competing priorities</h3>
+        <p>The matrix deliberately gives every member two managers: the CEO/CTO administratively and the Senior Manager for project work. Without clear rules, the same person can receive conflicting instructions in the same week, which is the classic source of friction in matrix organisations.</p>
+        <div class="manage-label">How the group will manage it</div>
+        <ul>
+          <li>A written engagement charter defines decision rights: the Senior Manager owns project scope and sequencing, the CEO/CTO owns firm-level and administrative calls.</li>
+          <li>A short weekly stand-up aligns both axes before conflicting instructions can accumulate.</li>
+          <li>Any unresolved priority clash escalates to the CEO/CTO for a same-week decision, so disagreements have a defined exit.</li>
+        </ul>
+      </article>
+      <article class="card challenge-card reveal">
+        <div class="ch-no">Challenge 02</div>
+        <h3>Availability and uneven workload</h3>
+        <p>Every member balances this engagement against studies, work, and personal obligations, and the group's own attendance history shows that emergencies do arise. A small team has no slack: one silent absence can stall an entire workstream.</p>
+        <div class="manage-label">How the group will manage it</div>
+        <ul>
+          <li>Telegram remains the standing channel for asynchronous updates, so a member who misses a meeting still reports in and receives their task.</li>
+          <li>A shared task register records who owns what and by when, with internal deadlines set ahead of submission dates to create buffer.</li>
+          <li>Each deliverable has a named backup reviewer, so no single absence can block completion.</li>
+        </ul>
+      </article>
+      <article class="card challenge-card reveal">
+        <div class="ch-no">Challenge 03</div>
+        <h3>Client boundaries and scope creep</h3>
+        <p>A modernisation project invites expansion: every stakeholder conversation surfaces one more feature the platform could have. Because Group 6 is external to Yello Media Group, unmanaged scope growth would strain a fixed-capacity team and blur accountability between consultant and client.</p>
+        <div class="manage-label">How the group will manage it</div>
+        <ul>
+          <li>A written scope statement defines what the engagement covers, and anything beyond it enters a change-control log rather than the work plan.</li>
+          <li>The Senior Manager serves as the single point of contact with the client, so requests arrive through one door and receive one answer.</li>
+          <li>Milestone reviews with the client-side liaison confirm direction at set intervals instead of through ad hoc renegotiation.</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <img src="../assets/img/group6-logo.png" alt="Group 6 logo">
+    </div>
+    <p class="footer-meta"><a href="../index.html">GROUP 6 HUB</a> &middot; ASSIGNMENT 3 &middot; THE IDEAL SENIOR MANAGER</p>
+  </div>
+</footer>
+
+<script src="../assets/charts.js"></script>
+</body>
+</html>

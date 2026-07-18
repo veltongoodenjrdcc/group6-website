@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Main Plan | The Strategic Management Plan &middot; Group 6</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@500;600;700&family=Source+Sans+3:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css">
+<link rel="stylesheet" href="../assets/charts.css">
+<style>
+  .mp-hero {
+    background:
+      radial-gradient(900px 440px at 85% -10%, rgba(189, 147, 53, 0.20), transparent 62%),
+      radial-gradient(760px 400px at 0% 30%, rgba(91, 138, 78, 0.14), transparent 64%),
+      linear-gradient(180deg, #151D2A 0%, var(--dark) 100%);
+    color: var(--dark-text);
+    padding: 72px 0 80px;
+    border-bottom: 1px solid var(--dark-line);
+  }
+  .mp-hero .crumb {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--dark-text-soft);
+    margin-bottom: 26px;
+  }
+  .mp-hero .crumb a { color: var(--gold-bright); text-decoration: none; }
+  .mp-hero .crumb a:hover { text-decoration: underline; }
+  .mp-hero h1 {
+    font-size: clamp(32px, 4.4vw, 54px);
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.01em;
+    margin: 16px 0 12px;
+    max-width: 900px;
+  }
+  .mp-hero .hero-sub {
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--gold-bright);
+    margin-bottom: 18px;
+  }
+  .mp-hero .hero-lede {
+    font-size: 17.5px;
+    color: var(--dark-text-soft);
+    max-width: 780px;
+    margin-bottom: 30px;
+  }
+  .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+  .mp-hero .stat-grid { margin-top: 50px; }
+
+  .q-frame {
+    background: #FCFBF8;
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--gold);
+    border-radius: var(--radius);
+    padding: 22px 26px;
+    margin-bottom: 30px;
+    color: var(--ink-soft);
+    font-size: 16px;
+  }
+  .q-frame strong { color: var(--ink); }
+
+  .script-panel {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    padding: 34px 36px;
+    margin-top: 26px;
+  }
+  .script-panel .script-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .script-panel h3 { font-size: 21px; }
+  .script-panel .runtime {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--gold-deep);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .script-line { display: grid; grid-template-columns: 120px 1fr; gap: 16px; margin-bottom: 16px; }
+  .script-line .cue {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-faint);
+    letter-spacing: 0.04em;
+    padding-top: 3px;
+  }
+  .script-line p { color: var(--ink); font-size: 16px; }
+  .script-line p em { color: var(--ink-soft); font-size: 14.5px; }
+
+  .value-grid, .use-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+    gap: 18px;
+    margin-top: 26px;
+  }
+  .mini-card { padding: 26px 28px; }
+  .mini-card .tag {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 10px;
+  }
+  .mini-card h3 { font-size: 19px; margin-bottom: 8px; }
+  .mini-card p { color: var(--ink-soft); font-size: 15px; }
+
+  .report-flow {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    padding: 30px 32px;
+    margin-top: 26px;
+  }
+  .flow-row { display: grid; grid-template-columns: 190px 1fr; gap: 18px; padding: 16px 0; border-bottom: 1px solid var(--line-soft); }
+  .flow-row:last-child { border-bottom: none; }
+  .flow-row .when {
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--gold-deep);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding-top: 2px;
+  }
+  .flow-row h4 { font-size: 16.5px; margin-bottom: 4px; color: var(--ink); }
+  .flow-row p { color: var(--ink-soft); font-size: 15px; }
+
+  .plan-board {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    padding: 34px 36px;
+    margin-top: 26px;
+  }
+  .plan-goal {
+    background: linear-gradient(135deg, #1B2433 0%, #131A26 100%);
+    border-radius: var(--radius);
+    padding: 26px 30px;
+    margin-bottom: 26px;
+  }
+  .plan-goal .tag { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold-bright); margin-bottom: 10px; }
+  .plan-goal p { color: #fff; font-size: 19px; font-weight: 600; font-family: var(--font-serif); }
+  .plan-cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; }
+  .plan-col { background: #FCFBF8; border: 1px solid var(--line-soft); border-radius: var(--radius); padding: 20px 22px; }
+  .plan-col .col-head { font-family: var(--font-mono); font-size: 11.5px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold-deep); margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid var(--line-soft); }
+  .plan-col ul { list-style: none; display: grid; gap: 9px; }
+  .plan-col li { color: var(--ink-soft); font-size: 14px; padding-left: 16px; position: relative; }
+  .plan-col li::before { content: ""; position: absolute; left: 0; top: 8px; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="container nav-inner">
+    <a class="nav-brand" href="../index.html">
+      <img src="../assets/img/group6-logo.png" alt="Group 6 logo">
+    </a>
+    <div class="nav-links">
+      <a href="#q1">Q1 Video</a>
+      <a href="#q2">Q2 Project</a>
+      <a href="#q3">Q3 Manager</a>
+      <a href="#q4">Q4 Reporting</a>
+      <a href="#q5">Q5 AI</a>
+      <a href="#q6">Q6 Plan</a>
+      <a href="../index.html">Hub</a>
+    </div>
+  </div>
+</nav>
+
+<header class="mp-hero on-dark" id="overview" data-screen-label="Hero">
+  <div class="container">
+    <p class="crumb"><a href="../index.html">Group 6 Hub</a> / Main Plan</p>
+    <p class="eyebrow">Strategic Management &middot; Major Group Assignment</p>
+    <h1>The Strategic Management Plan</h1>
+    <p class="hero-sub">All six questions of the main group project, consolidated in one place</p>
+    <p class="hero-lede">This page carries the group's answers to Ques 1 through Ques 6: the CEO video plan, the FindYello.com project selection, the Senior Manager appointment, the reporting organisation, the AI agent strategy, and the one-page strategic management plan for the AI service enhancement.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-gold" href="#q6">The One-Page Plan</a>
+      <a class="btn btn-ghost-dark" href="#q5">AI Strategy</a>
+      <a class="btn btn-ghost-dark" href="../index.html#checklist">Project Checklist</a>
+    </div>
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-label">Questions</div>
+        <div class="stat-value">6 <span>of 6</span></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Project</div>
+        <div class="stat-value">Find<span>Yello</span></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">AI Enhancement</div>
+        <div class="stat-value">Concie<span>rge</span></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Video Status</div>
+        <div class="stat-value">To <span>Record</span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="section" id="q1">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">Ques 1 &middot; The CEO Video</p>
+      <h2>The one-minute team introduction</h2>
+    </div>
+    <div class="q-frame">The Group by consensus, has chosen a CEO. The CEO must select one member other than him or herself to do a one minute video introducing the team and saying why he or she was chosen as the leader (CEO) of the group. <strong>The members of the Group are required to appear in person in video.</strong></div>
+    <p class="role-note" style="max-width:820px;color:var(--ink-soft);margin-bottom:8px;">Group 6 selected Velton Gooden Jr. as CEO by consensus, and the CEO has selected <strong style="color:var(--ink);">Shanice Hamilton, Chief Communications Officer</strong>, to deliver the video. The selection follows the structure: presenting the team to an audience is the communications function, so the CCO carries it. All five members appear in person, with each member introduced on camera as the presenter names them.</p>
+    <div class="script-panel reveal">
+      <div class="script-head">
+        <h3>The 60-second script</h3>
+        <span class="runtime">Runtime target: 58 to 60 seconds &middot; approx. 150 words</span>
+      </div>
+      <div class="script-line">
+        <span class="cue">0:00 to 0:08</span>
+        <p><em>[Shanice to camera, team standing together]</em><br>Good day. We are Group 6, and this is the team behind the FindYello.com Modernisation Project.</p>
+      </div>
+      <div class="script-line">
+        <span class="cue">0:08 to 0:30</span>
+        <p><em>[Camera pans to each member as named]</em><br>Ryanna Graham, our Chief Financial Officer. Tamina-Shimone Green, our Chief Operations Officer. Tywan Hamilton, our Chief Marketing Officer. I am Shanice Hamilton, Chief Communications Officer. And leading us, Velton Gooden Jr., our Chief Executive and Technology Officer.</p>
+      </div>
+      <div class="script-line">
+        <span class="cue">0:30 to 0:52</span>
+        <p><em>[Back to Shanice]</em><br>We chose Velton as CEO by consensus, for three reasons. He founded and runs his own digital agency, so he leads projects like this for a living. Our project is a digital platform rebuild, and he carries both the strategy and the technology. And from day one, he has kept this team organised, documented, and on time.</p>
+      </div>
+      <div class="script-line">
+        <span class="cue">0:52 to 0:60</span>
+        <p><em>[Full team in frame]</em><br>We are Group 6. This is our plan, and this is the team delivering it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section alt" id="q2">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">Ques 2 &middot; The Project</p>
+      <h2>Project choice and value rationale</h2>
+    </div>
+    <div class="q-frame">By consensus, choose a project for any Jamaican business for implementation by the Group and say how the Group decided the idea would add value to the company.</div>
+    <p style="max-width:820px;color:var(--ink-soft);margin-bottom:6px;">By consensus, Group 6 selected the redevelopment and modernisation of FindYello.com for Yello Media Group: repositioning it from a legacy online directory into a modern, mobile-first, AI-assisted local business discovery and lead-conversion platform for Jamaica and the wider Caribbean. The group tested the idea against one question: does it create value for the consumer, the advertiser, and the company at the same time? It does, on all three counts. The full environmental scan behind this decision lives in <a href="assignment-2.html">Assignment 2</a>.</p>
+    <div class="value-grid">
+      <article class="card mini-card reveal">
+        <div class="tag">Value 01 &middot; Consumers</div>
+        <h3>Faster, more reliable discovery</h3>
+        <p>Users find trustworthy local businesses faster, through cleaner search, verified profiles, maps, WhatsApp messaging, and reviews.</p>
+      </article>
+      <article class="card mini-card reveal">
+        <div class="tag">Value 02 &middot; Advertisers</div>
+        <h3>Measurable leads for SMEs</h3>
+        <p>Small businesses see concrete lead indicators: profile views, calls, WhatsApp clicks, map directions, and website clicks.</p>
+      </article>
+      <article class="card mini-card reveal">
+        <div class="tag">Value 03 &middot; Yello Media Group</div>
+        <h3>A renewed platform advantage</h3>
+        <p>The company converts its historic directory advantage into a modern local-discovery platform advantage built on its strongest proprietary asset.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="q3">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">Ques 3 &middot; The Senior Manager</p>
+      <h2>The ideal Senior Manager in charge of Strategic Management</h2>
+    </div>
+    <div class="q-frame">Given the business and nature of the project, identify and justify your ideal Senior Manager in charge of Strategic Management.</div>
+    <p style="max-width:820px;color:var(--ink-soft);">Operating as an independent consultancy with Yello Media Group as its client, Group 6 ran a quasi-recruitment process across three shortlisted Jamaican professionals and appointed <strong style="color:var(--ink);">Keisha Muir (BSc, EMBA, LLB, PMP)</strong>, Senior Project Management Consultant at Digicel Group, as Senior Manager in charge of Strategic Management. The appointment rests on three pillars: certified delivery discipline at regional telecom scale, a project history in data management and customer experience that matches a directory platform's core needs, and the independence of an external professional, which preserves the consultancy's objectivity toward its client. She leads the engagement inside the group's matrix structure, working in conjunction with the team, with the CEO/CTO retaining overall accountability. The full recruitment narrative, structure description, and reporting-line diagram live in <a href="assignment-3.html">Assignment 3</a>.</p>
+  </div>
+</section>
+
+<section class="section alt" id="q4">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">Ques 4 &middot; Reporting</p>
+      <h2>Organising the project for accurate, on-time reporting</h2>
+    </div>
+    <div class="q-frame">Explain how you intend to organize the Project to facilitate accurate and on-time reporting.</div>
+    <p style="max-width:820px;color:var(--ink-soft);margin-bottom:6px;">Reporting follows the matrix structure: information moves along defined lines, on a fixed rhythm, in standard formats, from a single source of truth. Accuracy is engineered through verification habits, and timeliness through internal deadlines set ahead of external ones.</p>
+    <div class="report-flow reveal">
+      <div class="flow-row">
+        <span class="when">The Lines</span>
+        <div>
+          <h4>Who reports to whom</h4>
+          <p>Workstream leads report project progress to the Senior Manager, who consolidates into one engagement status for the CEO/CTO. The Senior Manager, as single point of contact, carries milestone reporting to the client-side liaison at Yello Media Group. One door in, one door out.</p>
+        </div>
+      </div>
+      <div class="flow-row">
+        <span class="when">Mondays</span>
+        <div>
+          <h4>Fifteen-minute stand-up</h4>
+          <p>Each workstream answers three questions: what moved, what is at risk, what is needed. Both reporting axes hear the same answers at the same time, so conflicting instructions cannot accumulate across the week.</p>
+        </div>
+      </div>
+      <div class="flow-row">
+        <span class="when">Fridays</span>
+        <div>
+          <h4>Written workstream status</h4>
+          <p>Each lead submits a short standard-format status: progress, risks, decisions needed, next steps, each item marked on-track, at-risk, or blocked. Standard formats make reports comparable week to week, which is what makes them accurate.</p>
+        </div>
+      </div>
+      <div class="flow-row">
+        <span class="when">Monthly</span>
+        <div>
+          <h4>Client steering review</h4>
+          <p>The Senior Manager presents consolidated progress against milestones to the client, with decisions logged and change requests routed through the change-control process defined in Assignment 3.</p>
+        </div>
+      </div>
+      <div class="flow-row">
+        <span class="when">Always</span>
+        <div>
+          <h4>Single source of truth</h4>
+          <p>A shared task register records every deliverable, owner, status, and deadline, with internal deadlines set 48 hours ahead of external ones to create buffer. Minutes and attendance are recorded for every meeting, a habit the group has kept since Assignment 2. This project website is the public face of that record, updated every assignment cycle.</p>
+        </div>
+      </div>
+      <div class="flow-row">
+        <span class="when">Controls</span>
+        <div>
+          <h4>Accuracy and escalation</h4>
+          <p>Every figure in a report is checked against its source before inclusion, and every deliverable has a named backup reviewer. Anything at risk for more than 48 hours escalates to the Senior Manager, and unresolved items go to the CEO/CTO for a same-week decision.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="q5">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">Ques 5 &middot; Artificial Intelligence</p>
+      <h2>AI agents in the strategic management process</h2>
+    </div>
+    <div class="q-frame">You intend to use Artificial Intelligence Agent(s) to assist with the strategic management process. Define artificial intelligence and briefly say what Ai agents are used for. Explain in practical terms how you intend to use it in your own business to make a difference.</div>
+    <p style="max-width:820px;color:var(--ink-soft);margin-bottom:4px;"><strong style="color:var(--ink);">Artificial intelligence</strong> is the capability of computer systems to perform tasks that normally require human intelligence, such as understanding language, recognising patterns, learning from data, and making decisions. <strong style="color:var(--ink);">AI agents</strong> are software systems built on that capability which pursue goals with a degree of autonomy: they perceive context, plan multi-step actions, use tools such as search engines, databases, and messaging platforms, and complete tasks with limited human supervision. In business they are used for research and monitoring, customer service, workflow automation, data cleaning and verification, content production, and analytics summarisation.</p>
+    <p style="max-width:820px;color:var(--ink-soft);margin-bottom:6px;">Group 6 applies AI agents on two levels: inside its own consultancy operations, where an agent-assisted production workflow already runs, and inside the FindYello product itself, where the AI enhancement is the difference-maker.</p>
+    <div class="use-grid">
+      <article class="card mini-card reveal">
+        <div class="tag">Consultancy Ops 01</div>
+        <h3>Agent-assisted production</h3>
+        <p>Deliverables, build scripts, diagrams, and this website are produced through an agent-assisted workflow, with human review on every output. What once took the group days now takes hours, at higher formatting quality.</p>
+      </article>
+      <article class="card mini-card reveal">
+        <div class="tag">Consultancy Ops 02</div>
+        <h3>Scanning and summarisation</h3>
+        <p>Agents monitor market and competitor signals for the environmental scan and summarise meetings into minutes, feeding the Friday status reports defined in Ques 4.</p>
+      </article>
+      <article class="card mini-card reveal">
+        <div class="tag">Product 01</div>
+        <h3>The FindYello AI Concierge</h3>
+        <p>A conversational agent that turns natural questions, such as a request for a plumber in Portmore open now, into verified matches with maps, reviews, and a WhatsApp contact path. Discovery becomes a conversation instead of a keyword search.</p>
+      </article>
+      <article class="card mini-card reveal">
+        <div class="tag">Product 02</div>
+        <h3>Agentic listing verification</h3>
+        <p>Verification agents continuously cross-check phone numbers, opening hours, and websites, flagging stale records for human confirmation. Data quality is a directory's core asset, and agents make verification continuous instead of periodic.</p>
+      </article>
+      <article class="card mini-card reveal">
+        <div class="tag">Product 03</div>
+        <h3>Advertiser analytics agent</h3>
+        <p>Each month, an agent turns raw lead events into a plain-language performance summary for every SME advertiser: what happened, what changed, and one suggested next step.</p>
+      </article>
+      <article class="card mini-card reveal">
+        <div class="tag">The Difference</div>
+        <h3>Why this matters</h3>
+        <p>The AI layer attacks the platform's two historic weaknesses at once: stale data and unclear advertiser value. Verified data makes the Concierge trustworthy, and the Concierge generates the lead events the analytics agent reports. Each agent strengthens the next.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section alt" id="q6">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">Ques 6 &middot; The One-Page Plan</p>
+      <h2>One-page strategic management plan</h2>
+    </div>
+    <div class="q-frame">Build out a one page Strategic Management Plan to target an objective/goal you have set for your startup and speak specifically to your Ai product/service enhancement.</div>
+    <p style="max-width:820px;color:var(--ink-soft);margin-bottom:6px;">The plan below targets a single goal for the Group 6 Consultancy startup and threads the AI service enhancement, the FindYello AI Concierge and its supporting agents, through every perspective. The designed one-page document is being produced separately; this is its full content.</p>
+    <div class="plan-board reveal">
+      <div class="plan-goal">
+        <div class="tag">The Goal</div>
+        <p>Deliver the FindYello.com modernisation and launch the AI Concierge by Q2 2027, converting AI-assisted discovery into measurable advertiser leads.</p>
+      </div>
+      <div class="plan-cols">
+        <div class="plan-col">
+          <div class="col-head">Foundation</div>
+          <ul>
+            <li>Mission: help Caribbean businesses be found, chosen, and contacted through modern digital discovery.</li>
+            <li>Vision: the region's trusted first stop for finding local businesses.</li>
+            <li>Values: verified accuracy, client independence, documented delivery, plain communication.</li>
+          </ul>
+        </div>
+        <div class="plan-col">
+          <div class="col-head">Competitive Advantages</div>
+          <ul>
+            <li>Agent-assisted delivery workflow with senior project leadership.</li>
+            <li>Matrix structure pairing functional depth with one engagement lead.</li>
+            <li>Living project website as a public accountability record.</li>
+          </ul>
+        </div>
+        <div class="plan-col">
+          <div class="col-head">Financial</div>
+          <ul>
+            <li>Grow advertiser lead events by 30% for the pilot cohort within two quarters of Concierge launch.</li>
+            <li>Deliver the engagement within the approved budget, with change requests costed before approval.</li>
+          </ul>
+        </div>
+        <div class="plan-col">
+          <div class="col-head">Customer / Client</div>
+          <ul>
+            <li>Launch the AI Concierge with WhatsApp contact paths on verified listings.</li>
+            <li>Raise verified-listing coverage to 85% in pilot categories before launch.</li>
+            <li>Monthly plain-language performance summaries to every pilot advertiser.</li>
+          </ul>
+        </div>
+        <div class="plan-col">
+          <div class="col-head">Internal / Operational</div>
+          <ul>
+            <li>Run continuous agentic listing verification with human confirmation on flags.</li>
+            <li>Hold 100% on-time weekly status reporting across all workstreams.</li>
+            <li>Route all scope changes through the change-control log.</li>
+          </ul>
+        </div>
+        <div class="plan-col">
+          <div class="col-head">People &amp; Learning</div>
+          <ul>
+            <li>Train every team member on agent-assisted workflows with human review.</li>
+            <li>Rotate backup reviewers across workstreams to spread knowledge.</li>
+            <li>Capture lessons at each milestone into the shared register.</li>
+          </ul>
+        </div>
+        <div class="plan-col">
+          <div class="col-head">Key Performance Indicators</div>
+          <ul>
+            <li>Advertiser lead events: +30% (pilot cohort).</li>
+            <li>Verified-listing coverage: 85% (pilot categories).</li>
+            <li>Concierge-to-contact conversion: 25% of sessions.</li>
+            <li>On-time reporting: 100% of weekly cycles.</li>
+          </ul>
+        </div>
+        <div class="plan-col">
+          <div class="col-head">Implementation Rhythm</div>
+          <ul>
+            <li>Monday stand-ups and Friday written statuses, per Ques 4.</li>
+            <li>Monthly client steering reviews against milestones.</li>
+            <li>Quarterly plan review of KPIs, risks, and targets.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <img src="../assets/img/group6-logo.png" alt="Group 6 logo">
+    </div>
+    <p class="footer-meta"><a href="../index.html">GROUP 6 HUB</a> &middot; MAIN PLAN &middot; THE STRATEGIC MANAGEMENT PLAN</p>
+  </div>
+</footer>
+
+<script src="../assets/charts.js"></script>
+</body>
+</html>

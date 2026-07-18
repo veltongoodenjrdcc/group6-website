@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 760" font-family="'Source Sans 3','Helvetica Neue',Helvetica,Arial,sans-serif">
+  <defs>
+    <style>
+      .box-dark { fill:#1B2433; stroke:#BD9335; stroke-width:2; rx:10; }
+      .box-gold { fill:#F4ECDA; stroke:#96741F; stroke-width:1.6; }
+      .box-light { fill:#FFFFFF; stroke:#E5E1D5; stroke-width:1.4; }
+      .box-node { fill:#FCFBF8; stroke:#CBDFC4; stroke-width:1.4; }
+      .t-name { font-size:17px; font-weight:700; fill:#1B2330; }
+      .t-name-dark { font-size:21px; font-weight:700; fill:#FFFFFF; }
+      .t-role { font-size:13.5px; font-weight:600; letter-spacing:0.06em; fill:#96741F; }
+      .t-role-dark { font-size:13.5px; font-weight:600; letter-spacing:0.08em; fill:#D9B45A; }
+      .t-sub { font-size:12.5px; fill:#5A6172; }
+      .t-node { font-size:13.5px; font-weight:600; fill:#3D6B33; }
+      .t-node-sub { font-size:11.5px; fill:#5A6172; }
+      .ln-solid { stroke:#8B91A0; stroke-width:2; fill:none; }
+      .ln-dot { stroke:#96741F; stroke-width:2; stroke-dasharray:3 5; fill:none; }
+      .ln-dash { stroke:#5A6172; stroke-width:1.8; stroke-dasharray:9 6; fill:none; }
+      .t-leg { font-size:12.5px; fill:#5A6172; }
+    </style>
+  </defs>
+
+  <!-- ================= reporting lines (drawn first, under boxes) ================= -->
+  <!-- CEO to functional executives (solid, administrative) -->
+  <path class="ln-solid" d="M760 126 V150 H422 V190"/>
+  <path class="ln-solid" d="M760 126 V150 H648 V190"/>
+  <path class="ln-solid" d="M760 126 V150 H873 V190"/>
+  <path class="ln-solid" d="M760 126 V150 H1098 V190"/>
+  <!-- CEO to Senior Manager, Strategic Management (solid, administrative) -->
+  <path class="ln-solid" d="M610 96 H160 V330"/>
+  <!-- Project axis: Senior Manager horizontal dotted line across workstreams -->
+  <path class="ln-dot" d="M280 392 H1200"/>
+  <!-- Functional executives down to project workstream nodes (dotted, project reporting) -->
+  <path class="ln-dot" d="M422 282 V352"/>
+  <path class="ln-dot" d="M648 282 V352"/>
+  <path class="ln-dot" d="M873 282 V352"/>
+  <path class="ln-dot" d="M1098 282 V352"/>
+  <!-- Senior Manager to client (dashed, client relationship) -->
+  <path class="ln-dash" d="M160 454 V560"/>
+
+  <!-- ================= level 1: CEO / CTO ================= -->
+  <rect class="box-dark" x="560" y="40" width="400" height="86" rx="10"/>
+  <text class="t-role-dark" x="760" y="70" text-anchor="middle">CHIEF EXECUTIVE / TECHNOLOGY OFFICER</text>
+  <text class="t-name-dark" x="760" y="98" text-anchor="middle">Velton Gooden Jr.</text>
+  <text class="t-sub" x="760" y="117" text-anchor="middle" fill="#9AA3B2">Group 6 Consultancy &#183; overall accountability</text>
+
+  <!-- ================= project axis: Senior Manager ================= -->
+  <rect class="box-gold" x="40" y="330" width="240" height="124" rx="10"/>
+  <text class="t-role" x="160" y="358" text-anchor="middle">SENIOR MANAGER,</text>
+  <text class="t-role" x="160" y="374" text-anchor="middle">STRATEGIC MANAGEMENT</text>
+  <text class="t-name" x="160" y="400" text-anchor="middle">Keisha Muir</text>
+  <text class="t-sub" x="160" y="418" text-anchor="middle">BSc, EMBA, LLB, PMP</text>
+  <text class="t-sub" x="160" y="436" text-anchor="middle">FindYello engagement lead</text>
+
+  <!-- ================= functional row ================= -->
+  <rect class="box-light" x="314" y="190" width="216" height="92" rx="10"/>
+  <text class="t-role" x="422" y="219" text-anchor="middle">CMO</text>
+  <text class="t-name" x="422" y="243" text-anchor="middle">Tywan S Hamilton</text>
+  <text class="t-sub" x="422" y="263" text-anchor="middle">Marketing &amp; brand</text>
+
+  <rect class="box-light" x="540" y="190" width="216" height="92" rx="10"/>
+  <text class="t-role" x="648" y="219" text-anchor="middle">CFO</text>
+  <text class="t-name" x="648" y="243" text-anchor="middle">Ryanna Graham</text>
+  <text class="t-sub" x="648" y="263" text-anchor="middle">Finance &amp; value analysis</text>
+
+  <rect class="box-light" x="765" y="190" width="216" height="92" rx="10"/>
+  <text class="t-role" x="873" y="219" text-anchor="middle">COO</text>
+  <text x="873" y="243" text-anchor="middle" font-size="15px" font-weight="700" fill="#1B2330">Tamina-Shimone Green</text>
+  <text class="t-sub" x="873" y="263" text-anchor="middle">Operations &amp; workflow</text>
+
+  <rect class="box-light" x="990" y="190" width="216" height="92" rx="10"/>
+  <text class="t-role" x="1098" y="219" text-anchor="middle">CCO</text>
+  <text class="t-name" x="1098" y="243" text-anchor="middle">Shanice Hamilton</text>
+  <text class="t-sub" x="1098" y="263" text-anchor="middle">Communications</text>
+
+  <!-- ================= project workstream nodes ================= -->
+  <rect class="box-node" x="330" y="352" width="185" height="80" rx="9"/>
+  <text class="t-node" x="422" y="386" text-anchor="middle">Marketing workstream</text>
+  <text class="t-node-sub" x="422" y="406" text-anchor="middle">Positioning, customer value</text>
+
+  <rect class="box-node" x="555" y="352" width="185" height="80" rx="9"/>
+  <text class="t-node" x="648" y="386" text-anchor="middle">Finance workstream</text>
+  <text class="t-node-sub" x="648" y="406" text-anchor="middle">Cost-benefit, budgeting</text>
+
+  <rect class="box-node" x="780" y="352" width="185" height="80" rx="9"/>
+  <text class="t-node" x="873" y="386" text-anchor="middle">Operations workstream</text>
+  <text class="t-node-sub" x="873" y="406" text-anchor="middle">Process, accountability</text>
+
+  <rect class="box-node" x="1005" y="352" width="185" height="80" rx="9"/>
+  <text class="t-node" x="1098" y="386" text-anchor="middle">Comms workstream</text>
+  <text class="t-node-sub" x="1098" y="406" text-anchor="middle">Written output, clarity</text>
+
+  <!-- ================= client (external) ================= -->
+  <rect x="30" y="560" width="368" height="128" rx="10" fill="#FFFFFF" stroke="#5A6172" stroke-width="1.8" stroke-dasharray="9 6"/>
+  <text class="t-role" x="214" y="590" text-anchor="middle" fill="#5A6172">CLIENT (EXTERNAL)</text>
+  <text x="214" y="616" text-anchor="middle" font-size="16.5px" font-weight="700" fill="#1B2330">Yello Media Group &#183; FindYello.com</text>
+  <text class="t-sub" x="214" y="637" text-anchor="middle">Client-side liaison: Executive Director,</text>
+  <text class="t-sub" x="214" y="655" text-anchor="middle">Digital Transformation &amp; Innovation</text>
+  <text class="t-sub" x="214" y="675" text-anchor="middle" font-style="italic">Not part of Group 6&#8217;s internal structure</text>
+
+  <!-- ================= legend ================= -->
+  <g transform="translate(650,560)">
+    <rect x="0" y="0" width="550" height="128" rx="10" fill="#FCFBF8" stroke="#E5E1D5" stroke-width="1.4"/>
+    <text x="24" y="32" font-size="13px" font-weight="700" fill="#1B2330" letter-spacing="0.06em">READING THE REPORTING LINES</text>
+    <line x1="24" y1="56" x2="84" y2="56" class="ln-solid"/>
+    <text class="t-leg" x="98" y="61">Solid: administrative reporting to the CEO/CTO</text>
+    <line x1="24" y1="84" x2="84" y2="84" class="ln-dot"/>
+    <text class="t-leg" x="98" y="89">Dotted: project reporting to the Senior Manager</text>
+    <line x1="24" y1="112" x2="84" y2="112" class="ln-dash"/>
+    <text class="t-leg" x="98" y="117">Dashed: external client relationship (not a line of authority)</text>
+  </g>
+</svg>

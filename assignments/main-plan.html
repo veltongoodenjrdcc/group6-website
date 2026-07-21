@@ -64,42 +64,31 @@
   }
   .q-frame strong { color: var(--ink); }
 
-  .script-panel {
-    background: var(--surface);
+  .video-frame {
+    margin-top: 26px;
     border: 1px solid var(--line);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow);
-    padding: 34px 36px;
-    margin-top: 26px;
+    overflow: hidden;
+    background: #000;
+    max-width: 900px;
   }
-  .script-panel .script-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 16px;
-    flex-wrap: wrap;
-    margin-bottom: 20px;
-    padding-bottom: 16px;
-    border-bottom: 1px solid var(--line-soft);
+  .video-frame video {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1974 / 1080;
+    object-fit: contain;
+    background: #000;
   }
-  .script-panel h3 { font-size: 21px; }
-  .script-panel .runtime {
-    font-family: var(--font-mono);
-    font-size: 12px;
-    color: var(--gold-deep);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-  .script-line { display: grid; grid-template-columns: 120px 1fr; gap: 16px; margin-bottom: 16px; }
-  .script-line .cue {
+  .video-caption {
     font-family: var(--font-mono);
     font-size: 12px;
     color: var(--ink-faint);
     letter-spacing: 0.04em;
-    padding-top: 3px;
+    text-transform: uppercase;
+    margin-top: 12px;
   }
-  .script-line p { color: var(--ink); font-size: 16px; }
-  .script-line p em { color: var(--ink-soft); font-size: 14.5px; }
 
   .value-grid, .use-grid {
     display: grid;
@@ -191,7 +180,7 @@
     <p class="eyebrow">Strategic Management &middot; Major Group Assignment</p>
     <h1>The Strategic Management Plan</h1>
     <p class="hero-sub">All six questions of the main group project, consolidated in one place</p>
-    <p class="hero-lede">This page carries the group's answers to Ques 1 through Ques 6: the CEO video plan, the FindYello.com project selection, the Senior Manager appointment, the reporting organisation, the AI agent strategy, and the one-page strategic management plan for the AI service enhancement.</p>
+    <p class="hero-lede">This page carries the group's answers to Ques 1 through Ques 6: the CEO video, the FindYello.com project selection, the Senior Manager appointment, the reporting organisation, the AI agent strategy, and the one-page strategic management plan for the AI service enhancement.</p>
     <div class="hero-ctas">
       <a class="btn btn-gold" href="#q6">The One-Page Plan</a>
       <a class="btn btn-ghost-dark" href="#q5">AI Strategy</a>
@@ -212,7 +201,7 @@
       </div>
       <div class="stat-card">
         <div class="stat-label">Video Status</div>
-        <div class="stat-value">To <span>Record</span></div>
+        <div class="stat-value">Re<span>corded</span></div>
       </div>
     </div>
   </div>
@@ -225,29 +214,14 @@
       <h2>The one-minute team introduction</h2>
     </div>
     <div class="q-frame">The Group by consensus, has chosen a CEO. The CEO must select one member other than him or herself to do a one minute video introducing the team and saying why he or she was chosen as the leader (CEO) of the group. <strong>The members of the Group are required to appear in person in video.</strong></div>
-    <p class="role-note" style="max-width:820px;color:var(--ink-soft);margin-bottom:8px;">Group 6 selected Velton Gooden Jr. as CEO by consensus, and the CEO has selected <strong style="color:var(--ink);">Shanice Hamilton, Chief Communications Officer</strong>, to deliver the video. The selection follows the structure: presenting the team to an audience is the communications function, so the CCO carries it. All five members appear in person, with each member introduced on camera as the presenter names them.</p>
-    <div class="script-panel reveal">
-      <div class="script-head">
-        <h3>The 60-second script</h3>
-        <span class="runtime">Runtime target: 58 to 60 seconds &middot; approx. 150 words</span>
-      </div>
-      <div class="script-line">
-        <span class="cue">0:00 to 0:08</span>
-        <p><em>[Shanice to camera, team standing together]</em><br>Good day. We are Group 6, and this is the team behind the FindYello.com Modernisation Project.</p>
-      </div>
-      <div class="script-line">
-        <span class="cue">0:08 to 0:30</span>
-        <p><em>[Camera pans to each member as named]</em><br>Ryanna Graham, our Chief Financial Officer. Tamina-Shimone Green, our Chief Operations Officer. Tywan Hamilton, our Chief Marketing Officer. I am Shanice Hamilton, Chief Communications Officer. And leading us, Velton Gooden Jr., our Chief Executive and Technology Officer.</p>
-      </div>
-      <div class="script-line">
-        <span class="cue">0:30 to 0:52</span>
-        <p><em>[Back to Shanice]</em><br>We chose Velton as CEO by consensus, for three reasons. He founded and runs his own digital agency, so he leads projects like this for a living. Our project is a digital platform rebuild, and he carries both the strategy and the technology. And from day one, he has kept this team organised, documented, and on time.</p>
-      </div>
-      <div class="script-line">
-        <span class="cue">0:52 to 0:60</span>
-        <p><em>[Full team in frame]</em><br>We are Group 6. This is our plan, and this is the team delivering it.</p>
-      </div>
+    <p class="role-note" style="max-width:820px;color:var(--ink-soft);margin-bottom:8px;">Group 6 selected Velton Gooden Jr. as CEO by consensus, and the CEO selected <strong style="color:var(--ink);">Tywan Hamilton, Chief Marketing Officer</strong>, to deliver the one-minute video. All five members appear in person. The video introduces the team and explains why Velton was chosen to lead the group.</p>
+    <div class="video-frame reveal">
+      <video controls preload="metadata" playsinline>
+        <source src="../assets/media/ceo-video.mp4" type="video/mp4">
+        Your browser does not support embedded video. <a href="../assets/media/ceo-video.mp4">Download the CEO video</a> instead.
+      </video>
     </div>
+    <p class="video-caption">Presenter: Tywan Hamilton, Chief Marketing Officer &middot; Runtime: approx. 60 seconds</p>
   </div>
 </section>
 

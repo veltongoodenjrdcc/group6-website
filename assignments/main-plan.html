@@ -215,8 +215,8 @@
     </div>
     <div class="q-frame">The Group by consensus, has chosen a CEO. The CEO must select one member other than him or herself to do a one minute video introducing the team and saying why he or she was chosen as the leader (CEO) of the group. <strong>The members of the Group are required to appear in the video.</strong></div>
     <p class="role-note" style="max-width:820px;color:var(--ink-soft);margin-bottom:8px;">Group 6 selected Velton Gooden Jr. as CEO by consensus, and the CEO selected <strong style="color:var(--ink);">Tywan Hamilton, Chief Marketing Officer</strong>, to deliver the one-minute video. All five members appear in person. The video introduces the team and explains why Velton was chosen to lead the group.</p>
-    <div class="video-frame reveal">
-      <video controls preload="metadata" playsinline>
+    <div class="video-frame reveal" id="ceo-video">
+      <video id="ceo-video-player" controls preload="metadata" playsinline>
         <source src="../assets/media/ceo-video.mp4" type="video/mp4">
         Your browser does not support embedded video. <a href="../assets/media/ceo-video.mp4">Download the CEO video</a> instead.
       </video>
@@ -456,5 +456,44 @@
 </footer>
 
 <script src="../assets/charts.js"></script>
+<script>
+  // Deep link support: main-plan.html#ceo-video scrolls to the video and starts it.
+  // Same-page clicks keep sound (the click is a user gesture); on a fresh page load
+  // browsers block audio autoplay, so fall back to a muted play there.
+  (function () {
+    var frame = document.getElementById('ceo-video');
+    var player = document.getElementById('ceo-video-player');
+    if (!frame || !player) return;
+
+    function playVideo(allowSound) {
+      frame.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      player.muted = !allowSound;
+      var attempt = player.play();
+      if (attempt && typeof attempt.catch === 'function') {
+        attempt.catch(function () {
+          // Autoplay with sound was blocked; retry muted so it still plays.
+          player.muted = true;
+          player.play().catch(function () {});
+        });
+      }
+    }
+
+    // Clicks on any same-page link to the video count as a user gesture: play with sound.
+    document.querySelectorAll('a[href$="#ceo-video"]').forEach(function (link) {
+      link.addEventListener('click', function () {
+        setTimeout(function () { playVideo(true); }, 60);
+      });
+    });
+
+    // Landing directly on the anchor (cross-page or refresh): muted autoplay.
+    if (window.location.hash === '#ceo-video') {
+      window.addEventListener('load', function () { playVideo(false); });
+    }
+    // In-page hash changes (e.g. browser back/forward to the anchor).
+    window.addEventListener('hashchange', function () {
+      if (window.location.hash === '#ceo-video') playVideo(false);
+    });
+  })();
+</script>
 </body>
 </html>
